@@ -104,14 +104,13 @@ const ProjectsPage = () => {
   return (
     <section className="min-h-screen flex flex-col justify-center items-center p-4 py-16 md:p-6 lg:p-8 relative overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
       <div className="w-full max-w-6xl mx-auto">
-        <motion.h1 
-          initial={{ opacity: 0, y: 20 }}
+        <motion.h2
+          initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="text-5xl font-bold text-center mb-12 bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent"
+          className="text-4xl md:text-5xl font-bold text-center mb-16 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent"
         >
           Projects
-        </motion.h1>
+        </motion.h2>
         
         <div className="relative w-full aspect-[16/9] md:aspect-[21/9] max-w-5xl mx-auto">
           <AnimatePresence initial={false} custom={direction}>
