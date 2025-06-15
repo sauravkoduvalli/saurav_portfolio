@@ -1,0 +1,77 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: dark;
+}
+
+html {
+  font-family: system-ui, -apple-system, sans-serif;
+  background-color: theme('colors.gray.900');
+  color: theme('colors.white');
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-width: 320px;
+  overflow: hidden;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Hide scrollbar but keep functionality */
+::-webkit-scrollbar {
+  display: none;
+}
+
+* {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Better touch handling */
+@media (pointer: coarse) {
+  * {
+    cursor: none !important;
+  }
+}
+
+/* Prevent text selection for better mobile experience */
+* {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Allow text selection in specific elements */
+p, h1, h2, h3, h4, h5, h6 {
+  cursor: text;
+  user-select: text;
+}
+
+/* Neumorphic button styles */
+.neumorphic-button {
+  border-radius: theme('borderRadius.lg');
+  border: 1px solid transparent;
+  padding: theme('spacing.2') theme('spacing.4');
+  font-size: theme('fontSize.base');
+  font-weight: theme('fontWeight.medium');
+  background-color: theme('colors.gray.800');
+  color: theme('colors.white');
+  cursor: pointer;
+  transition: all 200ms;
+}
+
+.neumorphic-button:hover {
+  border-color: theme('colors.blue.500');
+  background-color: theme('colors.gray.700');
+}
+
+.neumorphic-button:focus,
+.neumorphic-button:focus-visible {
+  outline: none;
+  box-shadow: theme('ringWidth.2') theme('ringOffsetWidth.2') theme('colors.blue.500');
+}
