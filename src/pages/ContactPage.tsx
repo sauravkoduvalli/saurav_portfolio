@@ -146,13 +146,11 @@ const ContactPage = () => {
                   className="w-full px-4 py-2.5 rounded-xl bg-white/5 dark:bg-slate-800/40 backdrop-blur-md border border-violet-100 dark:border-slate-700/50 text-slate-800 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-violet-500 dark:focus:ring-violet-400 focus:border-transparent transition-all resize-none"
                   required
                 />
-              </div>
-
-              <motion.button
+              </div>              <motion.button
                 type="submit"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="w-full py-3 rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 dark:from-violet-500 dark:to-indigo-500 text-white font-medium hover:shadow-lg hover:shadow-violet-500/25 dark:hover:shadow-violet-400/25 transition-all duration-300"
+                className="w-full py-4 md:py-3 rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 dark:from-violet-500 dark:to-indigo-500 text-white font-medium hover:shadow-lg hover:shadow-violet-500/25 dark:hover:shadow-violet-400/25 transition-all duration-300 text-lg md:text-base"
               >
                 Send Message
               </motion.button>

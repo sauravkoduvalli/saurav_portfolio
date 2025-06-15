@@ -68,7 +68,7 @@ const HomePage = () => {
             whileHover={{ scale: 1.02, boxShadow: '0 20px 25px -5px rgb(79 70 229 / 0.1), 0 8px 10px -6px rgb(79 70 229 / 0.1)' }}
             whileTap={{ scale: 0.98 }}
             href="#projects"
-            className="px-8 py-3.5 rounded-2xl bg-gradient-to-r from-violet-600 to-indigo-600 dark:from-violet-500 dark:to-indigo-500 text-white font-medium transition-all duration-300"
+            className="px-8 py-4 md:py-3.5 rounded-2xl bg-gradient-to-r from-violet-600 to-indigo-600 dark:from-violet-500 dark:to-indigo-500 text-white font-medium transition-all duration-300 text-lg md:text-base"
           >
             View My Work
           </motion.a>

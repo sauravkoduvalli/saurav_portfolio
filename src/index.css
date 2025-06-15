@@ -34,12 +34,21 @@ body {
 /* Better touch handling */
 @media (pointer: coarse) {
   * {
-    cursor: none !important;
+    cursor: default !important;
+  }
+
+  /* Improve tap target sizes for touch devices */
+  button, a, [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 12px;
   }
 }
 
-/* Prevent text selection for better mobile experience */
+/* Prevent text selection except where needed */
 * {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
