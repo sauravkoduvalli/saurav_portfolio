@@ -1,14 +1,14 @@
 @import "tailwindcss";
 
-:root {
-  color-scheme: dark;
-}
+@custom-variant dark (&:where(.dark, .dark *));
 
 html {
   font-family: system-ui, -apple-system, sans-serif;
-  background-color: theme('colors.gray.900');
-  color: theme('colors.white');
   -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 
 body {

@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from 'react';
 import type { ReactNode } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import DotNavigation from '../components/DotNavigation';
+import ThemeControl from '../components/ThemeControl';
 
 interface Section {
   id: string;
@@ -107,9 +108,9 @@ const AppLayout = ({ sections }: AppLayoutProps) => {
       )}
     </AnimatePresence>
   );
-
   return (
-    <div className="h-screen w-screen bg-gray-900 text-white overflow-hidden">
+    <div className="relative h-screen w-screen overflow-hidden bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark transition-colors duration-300">
+      <ThemeControl />
       <DotNavigation
         totalSections={sections.length}
         currentSection={currentSection}
@@ -118,7 +119,7 @@ const AppLayout = ({ sections }: AppLayoutProps) => {
       
       <div
         ref={containerRef}
-        className="h-full overflow-y-auto snap-y snap-mandatory scroll-smooth"
+        className="h-full w-full overflow-y-auto scroll-smooth"
         style={{ scrollbarWidth: 'none' }}
       >
         <AnimatePresence mode="wait">

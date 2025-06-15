@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion';
-import NeumorphicCard from '../components/NeumorphicCard';
 
 const AboutPage = () => {
   const education = [
@@ -25,39 +24,41 @@ const AboutPage = () => {
   ];
 
   return (
-    <div className="min-h-screen w-full flex items-center justify-center px-4 py-16 md:p-6 lg:p-8 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
+    <div className="min-h-screen w-full flex items-center justify-center p-4 py-16 md:p-6 lg:p-8 bg-gradient-to-br from-violet-50 via-sky-50 to-indigo-50 dark:from-slate-950 dark:via-indigo-950 dark:to-slate-950">
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))] dark:bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(88,28,135,0.3),rgba(255,255,255,0))]"></div>
+
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="w-full max-w-4xl space-y-8"
+        className="w-full max-w-4xl space-y-8 relative z-10"
       >
         <motion.h2 
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-3xl md:text-4xl font-bold text-center mb-12 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent"
+          className="text-4xl md:text-5xl font-bold text-center mb-12 bg-gradient-to-r from-violet-600 via-indigo-600 to-sky-600 dark:from-violet-400 dark:via-indigo-400 dark:to-sky-400 text-transparent bg-clip-text"
         >
           About Me
         </motion.h2>
 
-        <div className="grid md:grid-cols-2 gap-8 mb-12">
+        <div className="grid md:grid-cols-2 gap-8">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.2 }}
           >
-            <NeumorphicCard>
-              <h3 className="text-xl font-bold mb-4">Background</h3>
-              <p className="text-gray-300 leading-relaxed mb-4">
+            <div className="p-8 rounded-3xl bg-white/10 dark:bg-slate-900/20 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 shadow-2xl shadow-indigo-500/5 dark:shadow-indigo-950/5">
+              <h3 className="text-xl font-bold mb-4 text-slate-800 dark:text-slate-200">Background</h3>
+              <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
                 I'm a passionate mobile app developer based in Kochi, India, with expertise 
                 in Flutter and React Native. I specialize in creating beautiful, performant 
                 mobile applications that provide exceptional user experiences.
               </p>
-              <p className="text-gray-300 leading-relaxed">
+              <p className="text-slate-600 dark:text-slate-300 leading-relaxed">
                 With a strong foundation in both front-end and back-end development, 
                 I enjoy tackling complex problems and turning innovative ideas into 
                 reality through clean, efficient code.
               </p>
-            </NeumorphicCard>
+            </div>
           </motion.div>
 
           <motion.div
@@ -65,18 +66,18 @@ const AboutPage = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.3 }}
           >
-            <NeumorphicCard>
-              <h3 className="text-xl font-bold mb-4">Education</h3>
-              <div className="space-y-4">
+            <div className="p-8 rounded-3xl bg-white/10 dark:bg-slate-900/20 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 shadow-2xl shadow-indigo-500/5 dark:shadow-indigo-950/5">
+              <h3 className="text-xl font-bold mb-4 text-slate-800 dark:text-slate-200">Education</h3>
+              <div className="space-y-6">
                 {education.map((edu, index) => (
-                  <div key={index} className="border-l-2 border-blue-500 pl-4">
-                    <h4 className="font-semibold text-white">{edu.degree}</h4>
-                    <p className="text-gray-400 text-sm">{edu.institution}</p>
-                    <p className="text-blue-400 text-sm">{edu.year}</p>
+                  <div key={index} className="relative pl-6 border-l-2 border-violet-500 dark:border-violet-400">
+                    <h4 className="font-semibold text-slate-800 dark:text-slate-200">{edu.degree}</h4>
+                    <p className="text-slate-600 dark:text-slate-400 text-sm">{edu.institution}</p>
+                    <p className="text-violet-600 dark:text-violet-400 text-sm">{edu.year}</p>
                   </div>
                 ))}
               </div>
-            </NeumorphicCard>
+            </div>
           </motion.div>
         </div>
 
@@ -84,10 +85,9 @@ const AboutPage = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
-          className="mb-8"
         >
-          <NeumorphicCard>
-            <h3 className="text-xl font-bold mb-6">Soft Skills</h3>
+          <div className="p-8 rounded-3xl bg-white/10 dark:bg-slate-900/20 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 shadow-2xl shadow-indigo-500/5 dark:shadow-indigo-950/5">
+            <h3 className="text-xl font-bold mb-6 text-slate-800 dark:text-slate-200">Soft Skills</h3>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
               {softSkills.map((skill, index) => (
                 <motion.div
@@ -95,14 +95,15 @@ const AboutPage = () => {
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 0.5 + index * 0.1 }}
-                  className="flex items-center gap-3 p-3 rounded-lg bg-gray-800/50"
+                  whileHover={{ scale: 1.05 }}
+                  className="flex items-center gap-3 p-4 rounded-2xl bg-white/5 dark:bg-slate-800/40 backdrop-blur-md border border-violet-100 dark:border-slate-700/50"
                 >
                   <span className="text-2xl">{skill.icon}</span>
-                  <span className="text-gray-300">{skill.skill}</span>
+                  <span className="text-slate-600 dark:text-slate-300">{skill.skill}</span>
                 </motion.div>
               ))}
             </div>
-          </NeumorphicCard>
+          </div>
         </motion.div>
       </motion.div>
     </div>
