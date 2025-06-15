@@ -1,54 +1,76 @@
-# React + TypeScript + Vite
+# Saurav K | Mobile Developer Portfolio 🚀
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome to the personal portfolio of **Saurav K**, a passionate **Mobile App Developer** with expertise in **Flutter**, **React Native**, and a growing interest in **React.js**. This project showcases his experience, projects, and skills through an immersive, mobile-first web experience built with React and Tailwind CSS.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🌟 Features
 
-## Expanding the ESLint configuration
+* ⚡ **Modern PWA Feel** – Fullscreen app-like UI with touch-friendly design
+* 🎯 **Scroll Snapping Navigation** – Seamless vertical scroll between full sections
+* ✨ **Neumorphism / Glassmorphism UI** – Stylish card components
+* 🎮 **Framer Motion Animations** – Smooth onboarding-style transitions
+* 🎨 **Tailwind CSS** – Rapid styling with mobile responsiveness
+* 📱 **Fully Responsive Design** – Optimized for mobile, tablet, and desktop
+* 🌙 **Dark Mode** – Toggle between light and dark themes
+* 📦 **Data-Driven** – Projects, skills, and experience loaded from JSON
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## 📁 Folder Structure
+
+```
+src/
+├── assets/          # Images, icons, background illustrations
+├── components/      # Reusable UI components (Cards, Timeline, Buttons)
+├── pages/           # Section pages (Home, About, Skills, etc.)
+├── data/            # JSON data for projects, skills, experience
+├── App.jsx
+└── main.jsx
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🛠️ Tech Stack
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+* **React.js (Vite)**
+* **Tailwind CSS**
+* **Framer Motion**
+* **React Router**
+* **PWA Support**
+* **EmailJS** (optional for contact form)
+
+---
+
+## 🧠 Sections
+
+* **Home** – Hero with intro and tagline
+* **About** – Bio, education, soft skills
+* **Skills** – Categorized skill cards
+* **Experience** – Vertical timeline with highlights
+* **Projects** – Interactive carousel with real project links
+* **Contact** – Email, GitHub, LinkedIn, location (Kochi, India)
+
+---
+
+## 📌 Live Demo
+
+Coming Soon: [https://your-deployment-link.com](https://your-deployment-link.com)
+
+---
+
+## 🔗 Connect with Saurav
+
+* 💼 [LinkedIn](https://www.linkedin.com/in/sauravkoduvalli/)
+* 💻 [GitHub](https://github.com/sauravkoduvalli)
+* 📧 [sauravkoduvalli@gmail.com](mailto:sauravkoduvalli@gmail.com)
+
+---
+
+## 📝 License
+
+This project is open source and available under the [MIT License](LICENSE).
+
+---
+
+> Designed & Developed with ❤️ by Saurav K
