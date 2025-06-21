@@ -2,6 +2,7 @@ import { useEffect, useState, useRef, useCallback, useTransition } from 'react';
 import type { ReactNode } from 'react';
 import ThemeControl from '../components/ThemeControl';
 import VerticalScrollNav from '../components/VerticalScrollNav';
+import Footer from '../components/Footer';
 
 interface Section {
   id: string;
@@ -62,7 +63,7 @@ const AppLayout = ({ sections }: AppLayoutProps) => {
   }, [sections]);
 
   return (
-    <div className="relative h-screen w-screen overflow-hidden bg-background dark:bg-darkBackground text-text dark:text-darkText transition-colors duration-300">
+    <div className="relative h-screen w-screen overflow-hidden text-text dark:text-darkText transition-colors duration-300">
       <ThemeControl />
       <VerticalScrollNav
         sections={sections}
@@ -87,6 +88,7 @@ const AppLayout = ({ sections }: AppLayoutProps) => {
             {section.component}
           </section>
         ))}
+        <Footer />
       </div>
     </div>
   );

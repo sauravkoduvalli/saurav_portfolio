@@ -63,21 +63,21 @@ const ExperiencePage = () => {
         >
           Work Experience
         </motion.h2>
-        <div className="relative flex flex-col gap-6 mt-8 px-4">
-          {/* Timeline vertical line */}
-          <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-[#D65A31] dark:bg-[#D65A31] transform -translate-x-1/2 z-0" />
+        <div className="relative flex flex-col gap-10 mt-8 px-4">
+          {/* Timeline vertical line: starts lower on mobile, full height on md+ */}
+          <div className="absolute left-1/2 top-[2.5rem] md:top-0 bottom-0 w-0.5 bg-[#D65A31] dark:bg-[#D65A31] transform -translate-x-1/2 z-0 transition-all duration-300" />
           {experiences.map((exp, index) => (
             <div key={exp.company} className="relative flex flex-col items-center md:grid md:grid-cols-2 md:gap-8">
-              {/* Timeline dot above the card, centered on the timeline */}
+              {/* Timeline dot above the card, except for the first card on mobile (always show on md+) */}
               <motion.div
-                className="absolute left-1/2 -translate-x-1/2 -top-4 md:top-8 w-5 h-5 rounded-full bg-[#D65A31] z-0 border-4 border-white dark:border-[#222831] shadow-lg"
+                className={`absolute left-1/2 -translate-x-1/2 -top-7 md:top-8 w-5 h-5 rounded-full bg-[#D65A31] z-0 border-4 border-white dark:border-[#222831] shadow-lg ${index === 0 ? 'hidden md:block' : ''}`}
                 whileHover={{ scale: 1.2 }}
               />
               <motion.div
                 initial={{ opacity: 0, x: 0 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.2 }}
-                className={`w-full max-w-md mx-auto p-8 rounded-3xl bg-[#ffffff] dark:bg-[#393E46] border border-[#cccccc] dark:border-[#2d2d2d] shadow-2xl text-center md:text-left z-10 ${
+                className={`w-full max-w-md mx-auto p-8 rounded-3xl bg-[#ffffff] dark:bg-[#393E46] border border-[#cccccc] dark:border-[#2d2d2d] shadow-2xl text-center md:text-left z-10 mt-4 md:mt-0 ${
                   index % 2 === 0 ? 'md:col-start-1' : 'md:col-start-2'
                 }`}
               >

@@ -87,7 +87,7 @@ const AboutPage = () => {
         >
           <div className="p-8 rounded-3xl bg-[#ffffff] dark:bg-[#393E46] border border-[#cccccc] dark:border-[#2d2d2d] shadow-2xl">
             <h3 className="text-xl font-bold mb-6 text-[#222831] dark:text-[#EEEEEE]">Soft Skills</h3>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
               {softSkills.map((skill, index) => (
                 <motion.div
                   key={skill.skill}
@@ -95,10 +95,10 @@ const AboutPage = () => {
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 0.5 + index * 0.1 }}
                   whileHover={{ scale: 1.05 }}
-                  className="flex items-center gap-3 p-4 rounded-2xl bg-[#EEEEEE] dark:bg-[#393E46] border border-[#cccccc] dark:border-[#2d2d2d]"
+                  className="flex items-center gap-3 p-4 rounded-2xl bg-[#EEEEEE] dark:bg-[#393E46] border border-[#cccccc] dark:border-[#2d2d2d] min-w-0"
                 >
-                  <span className="text-2xl">{skill.icon}</span>
-                  <span className="text-[#4a4a4a] dark:text-[#b0b0b0]">{skill.skill}</span>
+                  <span className="text-2xl flex-shrink-0">{skill.icon}</span>
+                  <span className="text-[#4a4a4a] dark:text-[#b0b0b0] break-words text-base sm:text-sm md:text-base">{skill.skill}</span>
                 </motion.div>
               ))}
             </div>
