@@ -1,7 +1,8 @@
-import { useEffect, useState, useRef, useCallback } from 'react';
+import { useEffect, useState, useRef, useCallback, useTransition } from 'react';
 import type { ReactNode } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ThemeControl from '../components/ThemeControl';
+import VerticalScrollNav from '../components/VerticalScrollNav';
 
 interface Section {
   id: string;
@@ -14,38 +15,9 @@ interface AppLayoutProps {
 
 const AppLayout = ({ sections }: AppLayoutProps) => {
   const [currentSection, setCurrentSection] = useState(0);
-  const [showScrollUp, setShowScrollUp] = useState(false);
+  const [, startTransition] = useTransition();
   const containerRef = useRef<HTMLDivElement>(null);
-  const [isScrolling, setIsScrolling] = useState(false);
   const [touchStart, setTouchStart] = useState(0);
-
-  // Debounced scroll handler
-  const handleScroll = useCallback(() => {
-    const container = containerRef.current;
-    if (!container) return;
-
-    const scrollTop = container.scrollTop;
-    const viewportHeight = container.clientHeight;
-    setShowScrollUp(scrollTop > viewportHeight * 0.3);
-  }, []);
-
-  // Track scroll position for scroll-up button with debounce
-  useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
-
-    let timeoutId: number;
-    const debouncedScroll = () => {
-      clearTimeout(timeoutId);
-      timeoutId = window.setTimeout(handleScroll, 100);
-    };
-
-    container.addEventListener('scroll', debouncedScroll, { passive: true });
-    return () => {
-      container.removeEventListener('scroll', debouncedScroll);
-      clearTimeout(timeoutId);
-    };
-  }, [handleScroll]);
 
   // Improved intersection observer
   useEffect(() => {
@@ -54,19 +26,22 @@ const AppLayout = ({ sections }: AppLayoutProps) => {
 
     const observer = new IntersectionObserver(
       (entries) => {
-        if (isScrolling) return;
-        
+        // Find the entry with the highest intersection ratio
+        let maxRatio = 0;
+        let maxIndex = 0;
         entries.forEach((entry) => {
-          if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
-            const index = sections.findIndex((s) => s.id === entry.target.id);
-            setCurrentSection(index);
+          const index = sections.findIndex((s) => s.id === entry.target.id);
+          if (entry.intersectionRatio > maxRatio) {
+            maxRatio = entry.intersectionRatio;
+            maxIndex = index;
           }
         });
+        startTransition(() => setCurrentSection(maxIndex));
       },
       {
         root: container,
-        threshold: [0.2, 0.5, 0.8],
-        rootMargin: '-10% 0px'
+        threshold: [0.5], // Only trigger when at least half is visible
+        // rootMargin removed for more accurate detection
       }
     );
 
@@ -74,28 +49,29 @@ const AppLayout = ({ sections }: AppLayoutProps) => {
     sectionElements.forEach((section) => observer.observe(section));
 
     return () => observer.disconnect();
-  }, [sections, isScrolling]);
+  }, [sections, startTransition]);
 
   // Smooth scroll implementation
   const scrollToSection = useCallback((index: number) => {
-    setIsScrolling(true);
     const container = containerRef.current;
     if (!container) return;
 
     const sectionElement = container.querySelector(`#${sections[index].id}`);
     if (sectionElement) {
-      const targetPosition = (sectionElement as HTMLElement).getBoundingClientRect().top + container.scrollTop;
-      
+      // Use offsetTop relative to the scroll container for accurate scrolling
+      const targetPosition = (sectionElement as HTMLElement).offsetTop;
       container.scrollTo({
         top: targetPosition,
         behavior: 'smooth'
       });
-
-      setCurrentSection(index);
-      
-      // Clear the isScrolling flag after animation completes
-      const clearScrollFlag = () => setIsScrolling(false);
-      setTimeout(clearScrollFlag, 1000);
+      startTransition(() => setCurrentSection(index));
+    } else if (index === 0) {
+      // Fallback: scroll to top if first section
+      container.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+      startTransition(() => setCurrentSection(0));
     }
   }, [sections]);
 
@@ -120,49 +96,11 @@ const AppLayout = ({ sections }: AppLayoutProps) => {
     }
   };
 
-  const ScrollButton = ({ direction, onClick, show = true }: { direction: 'up' | 'down', onClick: () => void, show?: boolean }) => (
-    <AnimatePresence>
-      {show && (
-        <motion.button
-          initial={{ opacity: 0, y: direction === 'up' ? 20 : -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: direction === 'up' ? 20 : -20 }}
-          onClick={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            onClick();
-          }}
-          className={`fixed ${direction === 'up' ? 'bottom-8' : 'bottom-24'} left-1/2 transform -translate-x-1/2 z-[100]
-            bg-gray-800/80 backdrop-blur-sm p-3 rounded-full border border-gray-700
-            hover:bg-gray-800/90 hover:border-gray-600 transition-all duration-200
-            focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50
-            active:scale-95 cursor-pointer select-none
-            flex items-center gap-2 text-gray-300 hover:text-white`}
-          style={{ touchAction: 'manipulation' }}
-        >
-          {direction === 'up' ? (
-            <>
-              <svg className="w-5 h-5 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-              </svg>
-              <span className="text-sm">Back to Top</span>
-            </>
-          ) : (
-            <>
-              <span className="text-sm">Scroll to Explore</span>
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-              </svg>
-            </>
-          )}
-        </motion.button>
-      )}
-    </AnimatePresence>
-  );
-
   return (
     <div className="relative h-screen w-screen overflow-hidden bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark transition-colors duration-300">
       <ThemeControl />
+      {/* Vertical navigation dots */}
+      <VerticalScrollNav sections={sections} currentSection={currentSection} onDotClick={scrollToSection} />
       <div
         ref={containerRef}
         onTouchStart={(e) => {
@@ -185,7 +123,7 @@ const AppLayout = ({ sections }: AppLayoutProps) => {
         }}
       >
         <AnimatePresence mode="wait">
-          {sections.map((section, index) => (
+          {sections.map((section) => (
             <motion.section
               key={section.id}
               id={section.id}
@@ -197,24 +135,6 @@ const AppLayout = ({ sections }: AppLayoutProps) => {
               viewport={{ once: true, margin: "-20%" }}
             >
               {section.component}
-              
-              {/* Show scroll buttons with improved positioning and logic */}
-              {index === 0 && (
-                <ScrollButton 
-                  direction="down" 
-                  onClick={() => {
-                    const nextSection = sections[1];
-                    if (nextSection) {
-                      setIsScrolling(true);
-                      scrollToSection(1);
-                    }
-                  }}
-                  show={true}
-                />
-              )}
-              {showScrollUp && index === currentSection && index !== 0 && (
-                <ScrollButton direction="up" onClick={() => scrollToSection(0)} show={true} />
-              )}
             </motion.section>
           ))}
         </AnimatePresence>
