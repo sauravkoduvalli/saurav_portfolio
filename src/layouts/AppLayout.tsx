@@ -16,7 +16,6 @@ const AppLayout = ({ sections }: AppLayoutProps) => {
   const [currentSection, setCurrentSection] = useState(0);
   const [, startTransition] = useTransition();
   const containerRef = useRef<HTMLDivElement>(null);
-  const [touchStart, setTouchStart] = useState(0);
 
   // Intersection observer to update current section
   useEffect(() => {
@@ -62,24 +61,6 @@ const AppLayout = ({ sections }: AppLayoutProps) => {
     }
   }, [sections]);
 
-  // Touch event handlers for swipe navigation
-  const handleTouchStart = (e: React.TouchEvent) => {
-    setTouchStart(e.touches[0].clientY);
-  };
-
-  const handleTouchEnd = (e: React.TouchEvent) => {
-    const touchEnd = e.changedTouches[0].clientY;
-    const touchDiff = touchStart - touchEnd;
-    const minSwipeDistance = 50;
-    if (Math.abs(touchDiff) > minSwipeDistance) {
-      if (touchDiff > 0 && currentSection < sections.length - 1) {
-        scrollToSection(currentSection + 1);
-      } else if (touchDiff < 0 && currentSection > 0) {
-        scrollToSection(currentSection - 1);
-      }
-    }
-  };
-
   return (
     <div className="relative h-screen w-screen overflow-hidden bg-background dark:bg-darkBackground text-text dark:text-darkText transition-colors duration-300">
       <ThemeControl />
@@ -90,16 +71,6 @@ const AppLayout = ({ sections }: AppLayoutProps) => {
       />
       <div
         ref={containerRef}
-        onTouchStart={(e) => {
-          if (!(e.target as HTMLElement).closest('button')) {
-            handleTouchStart(e);
-          }
-        }}
-        onTouchEnd={(e) => {
-          if (!(e.target as HTMLElement).closest('button')) {
-            handleTouchEnd(e);
-          }
-        }}
         className="h-full w-full overflow-y-auto scroll-smooth overscroll-y-contain"
         style={{
           scrollbarWidth: 'none',

@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 
 interface Project {
   title: string;
@@ -17,7 +17,6 @@ interface Project {
 
 const ProjectsPage = () => {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [direction, setDirection] = useState(0);
   const [isImageLoading, setIsImageLoading] = useState<{ [key: string]: boolean }>({});
 
   const projects: Project[] = [
@@ -47,7 +46,6 @@ const ProjectsPage = () => {
   ];
 
   const paginate = useCallback((newDirection: number) => {
-    setDirection(newDirection);
     setActiveIndex((prevIndex) => (
       prevIndex + newDirection < 0 
         ? projects.length - 1 
@@ -73,54 +71,82 @@ const ProjectsPage = () => {
     setIsImageLoading(prev => ({ ...prev, [projectTitle]: false }));
   };
 
+  const touchStartX = useRef<number | null>(null);
+  const touchEndX = useRef<number | null>(null);
+
+  // Swipe gesture handlers
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+  const handleTouchMove = (e: React.TouchEvent) => {
+    touchEndX.current = e.touches[0].clientX;
+  };
+  const handleTouchEnd = () => {
+    if (touchStartX.current !== null && touchEndX.current !== null) {
+      const diff = touchStartX.current - touchEndX.current;
+      if (Math.abs(diff) > 50) {
+        if (diff > 0 && activeIndex < projects.length - 1) {
+          paginate(1);
+        } else if (diff < 0 && activeIndex > 0) {
+          paginate(-1);
+        }
+      }
+    }
+    touchStartX.current = null;
+    touchEndX.current = null;
+  };
+
   return (
-    <div className="min-h-screen w-full flex items-center justify-center p-4 py-16 md:p-6 lg:p-8 bg-[#EEEEEE] dark:bg-[#222831]">
+    <div className="min-h-screen w-full flex items-center justify-center bg-[#EEEEEE] dark:bg-[#222831] px-2 sm:px-4 py-12 md:py-16">
       <div className="absolute inset-0" />
-      <div className="w-full max-w-6xl mx-auto relative z-10">
+      <div className="w-full max-w-screen-lg mx-auto relative z-10">
         <motion.h2
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-4xl md:text-5xl font-bold text-center mb-16 text-[#D65A31]"
+          className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-6 sm:mb-10 md:mb-14 text-[#D65A31]"
         >
           Projects
         </motion.h2>
-        
-        <div className="relative w-full aspect-[16/9] md:aspect-[21/9]">
-          <AnimatePresence initial={false} custom={direction}>
+        <div
+          className="relative w-full min-h-[500px] flex items-stretch overflow-hidden"
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+        >
+          <AnimatePresence initial={false} mode="wait">
             <motion.div
               key={activeIndex}
-              custom={direction}
-              initial={{ opacity: 0, x: direction > 0 ? 100 : -100 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: direction < 0 ? 100 : -100 }}
-              transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              className="absolute w-full h-full p-8 rounded-3xl bg-[#ffffff] dark:bg-[#393E46] border border-[#cccccc] dark:border-[#2d2d2d] shadow-2xl"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.35, ease: 'easeInOut' }}
+              layout
+              className="w-full h-full bg-[#ffffff] dark:bg-[#393E46] border border-[#cccccc] dark:border-[#2d2d2d] shadow-2xl rounded-xl sm:rounded-2xl md:rounded-3xl p-3 xs:p-4 sm:p-6 md:p-8"
             >
-              <div className="grid md:grid-cols-2 gap-8 h-full">
-                <div className="flex flex-col justify-between">
+              <div className="flex flex-col md:flex-row gap-6 md:gap-8 items-stretch">
+                {/* Text/Info Section */}
+                <div className="flex-1 flex flex-col justify-between space-y-4 md:space-y-8">
                   <div>
-                    <h3 className="text-3xl font-bold mb-2 text-[#D65A31]">{projects[activeIndex].title}</h3>
-                    <h4 className="text-xl text-[#222831] dark:text-[#EEEEEE] mb-4">
+                    <h3 className="text-xl xs:text-2xl sm:text-3xl font-bold mb-1 text-[#D65A31]">{projects[activeIndex].title}</h3>
+                    <h4 className="text-base xs:text-lg sm:text-xl text-[#222831] dark:text-[#EEEEEE] mb-2">
                       {projects[activeIndex].subtitle}
                     </h4>
-                    <p className="text-[#4a4a4a] dark:text-[#b0b0b0]">
+                    <p className="text-[#4a4a4a] dark:text-[#b0b0b0] text-sm sm:text-base">
                       {projects[activeIndex].description}
                     </p>
                   </div>
-
                   <div>
-                    <div className="flex flex-wrap gap-2 mb-6">
+                    <div className="flex flex-wrap gap-2 mb-3 sm:mb-5">
                       {projects[activeIndex].technologies.map((tech, index) => (
                         <span
                           key={index}
-                          className="px-3 py-1 text-sm rounded-full bg-[#EEEEEE] dark:bg-[#393E46] border border-[#cccccc] dark:border-[#2d2d2d] text-[#222831] dark:text-[#EEEEEE]"
+                          className="px-2 sm:px-3 py-1 text-xs sm:text-sm rounded-full bg-[#EEEEEE] dark:bg-[#393E46] border border-[#cccccc] dark:border-[#2d2d2d] text-[#222831] dark:text-[#EEEEEE]"
                         >
                           {tech}
                         </span>
                       ))}
                     </div>
-
-                    <div className="flex flex-wrap gap-3">
+                    <div className="flex flex-wrap gap-2 sm:gap-3">
                       {Object.entries(projects[activeIndex].links).map(([key, url]) => (
                         url && (
                           <motion.a
@@ -130,7 +156,7 @@ const ProjectsPage = () => {
                             href={url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="px-4 py-2 rounded-xl bg-[#D65A31] text-[#EEEEEE] font-medium hover:bg-[#b94a25] dark:hover:bg-[#b94a25] transition-all duration-300"
+                            className="px-3 sm:px-4 py-2 rounded-xl bg-[#D65A31] text-[#EEEEEE] font-medium hover:bg-[#b94a25] dark:hover:bg-[#b94a25] text-xs sm:text-base transition-all duration-300"
                           >
                             {key.replace(/([A-Z])/g, ' $1').trim()}
                           </motion.a>
@@ -139,67 +165,75 @@ const ProjectsPage = () => {
                     </div>
                   </div>
                 </div>
-
-                <div className="relative rounded-2xl overflow-hidden bg-[#EEEEEE] dark:bg-[#393E46] border border-[#cccccc] dark:border-[#2d2d2d]">
-                  {isImageLoading[projects[activeIndex].title] !== false && (
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="w-8 h-8 border-4 border-[#D65A31] border-t-transparent rounded-full animate-spin" />
-                    </div>
-                  )}
-                  <img
-                    src={projects[activeIndex].image}
-                    alt={projects[activeIndex].title}
-                    className="w-full h-full object-cover"
-                    onLoad={() => handleImageLoad(projects[activeIndex].title)}
-                    onError={() => handleImageError(projects[activeIndex].title)}
-                  />
+                {/* Image Section */}
+                <div className="flex-1 flex items-center justify-center min-h-[160px] xs:min-h-[200px] sm:min-h-[240px] md:min-h-0">
+                  <div className="relative w-full max-w-xs xs:max-w-sm sm:max-w-md md:max-w-full aspect-[4/3] sm:aspect-[16/9] rounded-lg sm:rounded-xl overflow-hidden bg-[#EEEEEE] dark:bg-[#393E46] border border-[#cccccc] dark:border-[#2d2d2d]">
+                    {isImageLoading[projects[activeIndex].title] !== false && (
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="w-8 h-8 border-4 border-[#D65A31] border-t-transparent rounded-full animate-spin" />
+                      </div>
+                    )}
+                    <img
+                      src={projects[activeIndex].image}
+                      alt={projects[activeIndex].title}
+                      className="w-full h-auto max-h-60 sm:max-h-80 md:max-h-[340px] object-cover"
+                      onLoad={() => handleImageLoad(projects[activeIndex].title)}
+                      onError={() => handleImageError(projects[activeIndex].title)}
+                    />
+                  </div>
                 </div>
               </div>
             </motion.div>
           </AnimatePresence>
         </div>
-
-        <div className="flex justify-center items-center gap-4 mt-8">
+        {/* Carousel Navigation - hidden on mobile/tablet */}
+        <div className="hidden md:flex flex-row justify-center items-center gap-2 mt-5">
           <motion.button
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
+            whileHover={{ scale: 1.08 }}
+            whileTap={{ scale: 0.92 }}
             onClick={() => paginate(-1)}
-            className="p-3 rounded-full bg-[#EEEEEE] dark:bg-[#393E46] border border-[#cccccc] dark:border-[#2d2d2d] text-[#222831] dark:text-[#EEEEEE]"
+            className="p-2 rounded-full bg-[#EEEEEE] dark:bg-[#393E46] border border-[#cccccc] dark:border-[#2d2d2d] text-[#222831] dark:text-[#EEEEEE] transition-all duration-200 disabled:opacity-40"
             disabled={activeIndex === 0}
+            aria-label="Previous project"
           >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
           </motion.button>
-
-          <div className="flex gap-2">
+          <div className="flex flex-row items-center gap-2">
             {projects.map((_, index) => (
               <button
                 key={index}
-                onClick={() => {
-                  setDirection(index > activeIndex ? 1 : -1);
-                  setActiveIndex(index);
-                }}
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                onClick={() => setActiveIndex(index)}
+                className={`w-2.5 h-2.5 rounded-full border border-[#cccccc] dark:border-[#2d2d2d] transition-all duration-200 ${
                   index === activeIndex
-                    ? 'bg-[#D65A31] scale-125'
+                    ? 'bg-[#D65A31] scale-110'
                     : 'bg-[#EEEEEE] dark:bg-[#393E46]'
                 }`}
+                aria-label={`Go to project ${index + 1}`}
               />
             ))}
           </div>
-
           <motion.button
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
+            whileHover={{ scale: 1.08 }}
+            whileTap={{ scale: 0.92 }}
             onClick={() => paginate(1)}
-            className="p-3 rounded-full bg-[#EEEEEE] dark:bg-[#393E46] border border-[#cccccc] dark:border-[#2d2d2d] text-[#222831] dark:text-[#EEEEEE]"
+            className="p-2 rounded-full bg-[#EEEEEE] dark:bg-[#393E46] border border-[#cccccc] dark:border-[#2d2d2d] text-[#222831] dark:text-[#EEEEEE] transition-all duration-200 disabled:opacity-40"
             disabled={activeIndex === projects.length - 1}
+            aria-label="Next project"
           >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
           </motion.button>
+        </div>
+        {/* Swipe hint for mobile/tablet */}
+        <div className="block md:hidden mt-4 text-center text-xs text-[#888] select-none">
+          <span className="inline-flex items-center gap-1">
+            <svg className="w-4 h-4 inline-block" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" /></svg>
+            Swipe left/right to explore
+            <svg className="w-4 h-4 inline-block" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
+          </span>
         </div>
       </div>
     </div>

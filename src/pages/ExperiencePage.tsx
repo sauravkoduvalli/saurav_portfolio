@@ -63,35 +63,31 @@ const ExperiencePage = () => {
         >
           Work Experience
         </motion.h2>
-        <div className="relative space-y-8">
-          <div className="absolute left-[50%] top-0 bottom-0 w-0.5 bg-[#D65A31] dark:bg-[#D65A31] transform -translate-x-1/2" />
+        <div className="relative flex flex-col gap-6 mt-8 px-4">
+          {/* Timeline vertical line */}
+          <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-[#D65A31] dark:bg-[#D65A31] transform -translate-x-1/2 z-0" />
           {experiences.map((exp, index) => (
-            <motion.div
-              key={exp.company}
-              initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
-              className={`relative grid grid-cols-1 md:grid-cols-2 gap-8 ${
-                index % 2 === 0 ? 'md:pr-12' : 'md:pl-12 md:flex-row-reverse'
-              }`}
-            >
-              {/* Timeline dot */}
-              <motion.div 
-                className={`absolute left-1/2 w-5 h-5 rounded-full bg-[#D65A31] transform -translate-x-1/2
-                  hover:scale-150 transition-transform duration-300 ease-in-out z-10`}
-                style={{ top: '2rem' }}
+            <div key={exp.company} className="relative flex flex-col items-center md:grid md:grid-cols-2 md:gap-8">
+              {/* Timeline dot above the card, centered on the timeline */}
+              <motion.div
+                className="absolute left-1/2 -translate-x-1/2 -top-4 md:top-8 w-5 h-5 rounded-full bg-[#D65A31] z-0 border-4 border-white dark:border-[#222831] shadow-lg"
                 whileHover={{ scale: 1.2 }}
               />
-              <div className={`p-8 rounded-3xl bg-[#ffffff] dark:bg-[#393E46] border border-[#cccccc] dark:border-[#2d2d2d] shadow-2xl ${
-                index % 2 === 0 ? 'md:col-start-1' : 'md:col-start-2'
-              }`}>
+              <motion.div
+                initial={{ opacity: 0, x: 0 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.2 }}
+                className={`w-full max-w-md mx-auto p-8 rounded-3xl bg-[#ffffff] dark:bg-[#393E46] border border-[#cccccc] dark:border-[#2d2d2d] shadow-2xl text-center md:text-left z-10 ${
+                  index % 2 === 0 ? 'md:col-start-1' : 'md:col-start-2'
+                }`}
+              >
                 <div className="space-y-6">
                   <div>
                     <h3 className="text-2xl font-bold text-[#D65A31]">{exp.role}</h3>
                     <p className="text-lg font-medium text-[#222831] dark:text-[#EEEEEE]">{exp.company}</p>
-                    <div className="flex items-center gap-3 text-sm text-[#4a4a4a] dark:text-[#b0b0b0] mt-1">
+                    <div className="flex flex-col items-center md:flex-row md:items-center gap-1 md:gap-3 text-sm text-[#4a4a4a] dark:text-[#b0b0b0] mt-1">
                       <span>{exp.period}</span>
-                      <span>•</span>
+                      <span className="hidden md:inline">•</span>
                       <span>{exp.location}</span>
                     </div>
                   </div>
@@ -102,14 +98,14 @@ const ExperiencePage = () => {
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: 0.3 + i * 0.1 }}
-                        className="flex items-start gap-3 group"
+                        className="flex items-start gap-3 group justify-center md:justify-start"
                       >
                         <span className="text-[#D65A31] mt-1.5">•</span>
                         <span className="text-[#222831] dark:text-[#EEEEEE] group-hover:text-[#222831] dark:group-hover:text-[#EEEEEE] transition-colors">{item}</span>
                       </motion.li>
                     ))}
                   </ul>
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap justify-center md:justify-start gap-2">
                     {exp.technologies.map((tech) => (
                       <span
                         key={tech}
@@ -120,8 +116,8 @@ const ExperiencePage = () => {
                     ))}
                   </div>
                 </div>
-              </div>
-            </motion.div>
+              </motion.div>
+            </div>
           ))}
         </div>
       </div>
