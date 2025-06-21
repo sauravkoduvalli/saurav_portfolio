@@ -13,7 +13,7 @@ interface VerticalScrollNavProps {
 }
 
 const VerticalScrollNav: React.FC<VerticalScrollNavProps> = ({ sections, currentSection, onDotClick }) => (
-  <div className="hidden lg:flex flex-col items-center gap-4 fixed right-4 top-1/2 -translate-y-1/2 z-[200] select-none">
+  <div className="hidden [@media(min-width:1220px)]:flex flex-col items-center gap-4 fixed right-4 top-1/2 -translate-y-1/2 z-[200] select-none">
     {sections.map((section, idx) => (
       <button
         key={section.id}

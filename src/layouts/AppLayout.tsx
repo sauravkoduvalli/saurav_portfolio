@@ -100,7 +100,11 @@ const AppLayout = ({ sections }: AppLayoutProps) => {
     <div className="relative h-screen w-screen overflow-hidden bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark transition-colors duration-300">
       <ThemeControl />
       {/* Vertical navigation dots */}
-      <VerticalScrollNav sections={sections} currentSection={currentSection} onDotClick={scrollToSection} />
+      <VerticalScrollNav
+        sections={sections}
+        currentSection={currentSection}
+        onDotClick={scrollToSection}
+      />
       <div
         ref={containerRef}
         onTouchStart={(e) => {
