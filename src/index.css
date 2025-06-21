@@ -1,9 +1,6 @@
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
+@import "tailwindcss";
 
-/* Semantic color utilities for custom palette */
-/* Use as className="bg-background dark:bg-darkBackground" etc. */
+@custom-variant dark (&:where(.dark, .dark *));
 
 html {
   font-family: system-ui, -apple-system, sans-serif;
