@@ -1,13 +1,13 @@
-@import "tailwindcss";
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
-@custom-variant dark (&:where(.dark, .dark *));
+/* Semantic color utilities for custom palette */
+/* Use as className="bg-background dark:bg-darkBackground" etc. */
 
 html {
   font-family: system-ui, -apple-system, sans-serif;
   -webkit-tap-highlight-color: transparent;
-}
-
-html {
   transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 
@@ -21,31 +21,14 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Hide scrollbar but keep functionality */
-::-webkit-scrollbar {
-  display: none;
-}
+::-webkit-scrollbar { display: none; }
+* { -ms-overflow-style: none; scrollbar-width: none; }
 
-* {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-/* Better touch handling */
 @media (pointer: coarse) {
-  * {
-    cursor: default !important;
-  }
-
-  /* Improve tap target sizes for touch devices */
-  button, a, [role="button"] {
-    min-height: 44px;
-    min-width: 44px;
-    padding: 12px;
-  }
+  * { cursor: default !important; }
+  button, a, [role="button"] { min-height: 44px; min-width: 44px; padding: 12px; }
 }
 
-/* Prevent text selection except where needed */
 * {
   -webkit-tap-highlight-color: transparent;
   -webkit-touch-callout: none;
@@ -55,13 +38,11 @@ body {
   user-select: none;
 }
 
-/* Allow text selection in specific elements */
 p, h1, h2, h3, h4, h5, h6 {
   cursor: text;
   user-select: text;
 }
 
-/* Neumorphic button styles */
 .neumorphic-button {
   border-radius: theme('borderRadius.lg');
   border: 1px solid transparent;

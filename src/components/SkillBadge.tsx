@@ -10,10 +10,10 @@ const SkillBadge = ({ name, icon, level = 0 }: SkillBadgeProps) => {
   return (
     <motion.div
       whileHover={{ scale: 1.05 }}
-      className="flex items-center gap-2 bg-white/10 dark:bg-slate-900/20 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 rounded-full px-4 py-2 transition-all duration-300"
+      className="flex items-center gap-2 bg-[#EEEEEE] dark:bg-[#222831] backdrop-blur-xl border border-[#cccccc] dark:border-[#2d2d2d] rounded-full px-4 py-2 transition-all duration-300"
     >
       {icon && <span className="text-xl">{icon}</span>}
-      <span className="text-slate-700 dark:text-slate-300 font-medium">
+      <span className="text-[#222831] dark:text-[#EEEEEE] font-medium">
         {name}
       </span>
       {level > 0 && (
@@ -23,8 +23,8 @@ const SkillBadge = ({ name, icon, level = 0 }: SkillBadgeProps) => {
               key={index}
               className={`w-1.5 h-1.5 rounded-full transition-colors duration-300 ${
                 index < level
-                  ? "bg-gradient-to-r from-violet-600 to-sky-600 dark:from-violet-400 dark:to-sky-400"
-                  : "bg-slate-200 dark:bg-slate-700"
+                  ? "bg-[#D65A31] to-[#007bff] dark:from-[#D65A31] dark:to-[#007bff]"
+                  : "bg-[#2a2a3d] dark:bg-[#2a2a3d]"
               }`}
             />
           ))}

@@ -53,21 +53,18 @@ const ExperiencePage = () => {
   ];
 
   return (
-    <div className="min-h-screen w-full flex items-center justify-center p-4 py-16 md:p-6 lg:p-8 bg-gradient-to-br from-violet-50 via-sky-50 to-indigo-50 dark:from-slate-950 dark:via-indigo-950 dark:to-slate-950">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))] dark:bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(88,28,135,0.3),rgba(255,255,255,0))]"></div>
-
+    <div className="min-h-screen w-full flex items-center justify-center p-4 py-16 md:p-6 lg:p-8 bg-[#EEEEEE] dark:bg-[#222831]">
+      <div className="absolute inset-0" />
       <div className="w-full max-w-6xl mx-auto relative z-10">
         <motion.h2
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-4xl md:text-5xl font-bold text-center mb-16 bg-gradient-to-r from-violet-600 via-indigo-600 to-sky-600 dark:from-violet-400 dark:via-indigo-400 dark:to-sky-400 text-transparent bg-clip-text"
+          className="text-4xl md:text-5xl font-bold text-center mb-16 text-[#D65A31]"
         >
           Work Experience
         </motion.h2>
-        
         <div className="relative space-y-8">
-          <div className="absolute left-[50%] top-0 bottom-0 w-0.5 bg-gradient-to-b from-violet-600 via-indigo-600 to-sky-600 dark:from-violet-400 dark:via-indigo-400 dark:to-sky-400 transform -translate-x-1/2" />
-
+          <div className="absolute left-[50%] top-0 bottom-0 w-0.5 bg-[#D65A31] dark:bg-[#D65A31] transform -translate-x-1/2" />
           {experiences.map((exp, index) => (
             <motion.div
               key={exp.company}
@@ -80,26 +77,24 @@ const ExperiencePage = () => {
             >
               {/* Timeline dot */}
               <motion.div 
-                className={`absolute left-1/2 w-5 h-5 rounded-full bg-gradient-to-r from-violet-600 to-sky-600 dark:from-violet-400 dark:to-sky-400 transform -translate-x-1/2
+                className={`absolute left-1/2 w-5 h-5 rounded-full bg-[#D65A31] transform -translate-x-1/2
                   hover:scale-150 transition-transform duration-300 ease-in-out z-10`}
                 style={{ top: '2rem' }}
                 whileHover={{ scale: 1.2 }}
               />
-
-              <div className={`p-8 rounded-3xl bg-white/10 dark:bg-slate-900/20 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 shadow-2xl shadow-indigo-500/5 dark:shadow-indigo-950/5 ${
+              <div className={`p-8 rounded-3xl bg-[#ffffff] dark:bg-[#393E46] border border-[#cccccc] dark:border-[#2d2d2d] shadow-2xl ${
                 index % 2 === 0 ? 'md:col-start-1' : 'md:col-start-2'
               }`}>
                 <div className="space-y-6">
                   <div>
-                    <h3 className="text-2xl font-bold bg-gradient-to-r from-violet-600 to-sky-600 dark:from-violet-400 dark:to-sky-400 text-transparent bg-clip-text">{exp.role}</h3>
-                    <p className="text-lg font-medium text-slate-700 dark:text-slate-300">{exp.company}</p>
-                    <div className="flex items-center gap-3 text-sm text-slate-600 dark:text-slate-400 mt-1">
+                    <h3 className="text-2xl font-bold text-[#D65A31]">{exp.role}</h3>
+                    <p className="text-lg font-medium text-[#222831] dark:text-[#EEEEEE]">{exp.company}</p>
+                    <div className="flex items-center gap-3 text-sm text-[#4a4a4a] dark:text-[#b0b0b0] mt-1">
                       <span>{exp.period}</span>
                       <span>•</span>
                       <span>{exp.location}</span>
                     </div>
                   </div>
-
                   <ul className="space-y-3">
                     {exp.description.map((item, i) => (
                       <motion.li
@@ -109,17 +104,16 @@ const ExperiencePage = () => {
                         transition={{ delay: 0.3 + i * 0.1 }}
                         className="flex items-start gap-3 group"
                       >
-                        <span className="text-violet-600 dark:text-violet-400 mt-1.5">•</span>
-                        <span className="text-slate-600 dark:text-slate-400 group-hover:text-slate-800 dark:group-hover:text-slate-200 transition-colors">{item}</span>
+                        <span className="text-[#D65A31] mt-1.5">•</span>
+                        <span className="text-[#222831] dark:text-[#EEEEEE] group-hover:text-[#222831] dark:group-hover:text-[#EEEEEE] transition-colors">{item}</span>
                       </motion.li>
                     ))}
                   </ul>
-
                   <div className="flex flex-wrap gap-2">
                     {exp.technologies.map((tech) => (
                       <span
                         key={tech}
-                        className="px-3 py-1 text-sm rounded-full bg-white/5 dark:bg-slate-800/40 backdrop-blur-md border border-violet-100 dark:border-slate-700/50 text-slate-700 dark:text-slate-300"
+                        className="px-3 py-1 text-sm rounded-full bg-[#EEEEEE] dark:bg-[#393E46] border border-[#cccccc] dark:border-[#2d2d2d] text-[#222831] dark:text-[#EEEEEE]"
                       >
                         {tech}
                       </span>

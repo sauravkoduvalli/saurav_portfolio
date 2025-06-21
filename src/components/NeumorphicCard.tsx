@@ -12,14 +12,14 @@ const NeumorphicCard = ({ children, className = "" }: NeumorphicCardProps) => {
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
       className={`relative 
-        bg-surface-light dark:bg-surface-dark
-        text-text-light dark:text-text-dark
+        bg-[#EEEEEE] dark:bg-[#222831]
+        text-[#222831] dark:text-[#EEEEEE]
         backdrop-blur-lg 
         rounded-2xl 
         p-6
         dark:shadow-[inset_0_0_20px_rgba(255,255,255,0.05)]
         shadow-[inset_0_0_20px_rgba(0,0,0,0.05)]
-        border border-gray-200 dark:border-gray-700/50
+        border border-[#cccccc] dark:border-[#2d2d2d]
         transition-all duration-300
         ${className}
       `}

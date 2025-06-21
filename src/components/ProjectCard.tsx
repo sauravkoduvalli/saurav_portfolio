@@ -13,7 +13,7 @@ const ProjectCard = ({ title, description, technologies, imageUrl, githubUrl, li
   return (
     <motion.div
       whileHover={{ y: -5 }}
-      className="bg-white/10 dark:bg-slate-900/20 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 rounded-2xl overflow-hidden shadow-xl transition-all duration-300"
+      className="bg-[#EEEEEE] dark:bg-[#222831] backdrop-blur-xl border border-[#cccccc] dark:border-[#2d2d2d] rounded-2xl overflow-hidden shadow-xl transition-all duration-300"
     >
       <div className="relative">
         <img 
@@ -24,13 +24,15 @@ const ProjectCard = ({ title, description, technologies, imageUrl, githubUrl, li
         <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
       </div>
       <div className="p-8">
-        <h3 className="text-xl font-semibold bg-gradient-to-r from-violet-600 via-indigo-600 to-sky-600 dark:from-violet-400 dark:via-indigo-400 dark:to-sky-400 text-transparent bg-clip-text mb-2">{title}</h3>
-        <p className="text-slate-700 dark:text-slate-300 mb-4">{description}</p>
+        <h3 className="text-xl font-semibold bg-clip-text mb-2" style={{ backgroundImage: 'linear-gradient(to right, #7f1d8d, #641e7b, #3b82f6)' }}>
+          {title}
+        </h3>
+        <p className="text-[#4a4a4a] dark:text-[#b0b0b0] mb-4">{description}</p>
         <div className="flex flex-wrap gap-2 mb-4">
           {technologies.map((tech) => (
             <span
               key={tech}
-              className="px-3 py-1 bg-white/5 dark:bg-slate-800/50 backdrop-blur-md border border-violet-100 dark:border-slate-700/50 text-slate-700 dark:text-slate-300 rounded-full text-sm"
+              className="px-3 py-1 bg-[#ffffff] dark:bg-[#393E46] backdrop-blur-md border border-[#3b82f6] dark:border-[#3b82f6] text-[#222831] dark:text-[#EEEEEE] rounded-full text-sm"
             >
               {tech}
             </span>
@@ -42,7 +44,7 @@ const ProjectCard = ({ title, description, technologies, imageUrl, githubUrl, li
               href={githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-violet-600 dark:text-violet-400 hover:text-violet-700 dark:hover:text-violet-300 transition-colors"
+              className="text-[#3b82f6] dark:text-[#3b82f6] hover:text-[#2563eb] dark:hover:text-[#2563eb] transition-colors"
             >
               GitHub
             </a>
@@ -52,7 +54,7 @@ const ProjectCard = ({ title, description, technologies, imageUrl, githubUrl, li
               href={liveUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sky-600 dark:text-sky-400 hover:text-sky-700 dark:hover:text-sky-300 transition-colors"
+              className="text-[#3b82f6] dark:text-[#3b82f6] hover:text-[#2563eb] dark:hover:text-[#2563eb] transition-colors"
             >
               Live Demo
             </a>

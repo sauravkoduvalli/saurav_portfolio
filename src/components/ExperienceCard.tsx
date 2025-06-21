@@ -14,12 +14,12 @@ const ExperienceCard = ({ company, position, duration, description, technologies
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      className="bg-white/10 dark:bg-slate-900/20 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 rounded-2xl p-8 shadow-xl"
+      className="bg-[#EEEEEE] dark:bg-[#222831] backdrop-blur-xl border border-[#cccccc] dark:border-[#2d2d2d] rounded-2xl p-8 shadow-xl"
     >
-      <h3 className="text-xl font-bold bg-gradient-to-r from-violet-600 via-indigo-600 to-sky-600 dark:from-violet-400 dark:via-indigo-400 dark:to-sky-400 text-transparent bg-clip-text mb-1">{position}</h3>
-      <h4 className="text-lg text-slate-700 dark:text-slate-300 mb-2">{company}</h4>
-      <p className="text-slate-600 dark:text-slate-400 text-sm mb-4">{duration}</p>
-      <ul className="list-disc list-inside mb-4 text-slate-700 dark:text-slate-300 space-y-2">
+      <h3 className="text-xl font-bold bg-[#D65A31] dark:bg-[#D65A31] text-transparent bg-clip-text mb-1">{position}</h3>
+      <h4 className="text-lg text-[#222831] dark:text-[#EEEEEE] mb-2">{company}</h4>
+      <p className="text-[#4a4a4a] dark:text-[#b0b0b0] text-sm mb-4">{duration}</p>
+      <ul className="list-disc list-inside mb-4 text-[#222831] dark:text-[#EEEEEE] space-y-2">
         {description.map((item, index) => (
           <li key={index}>{item}</li>
         ))}
@@ -28,7 +28,7 @@ const ExperienceCard = ({ company, position, duration, description, technologies
         {technologies.map((tech) => (
           <span
             key={tech}
-            className="px-3 py-1 bg-white/5 dark:bg-slate-800/50 backdrop-blur-md border border-violet-100 dark:border-slate-700/50 text-slate-700 dark:text-slate-300 rounded-full text-sm"
+            className="px-3 py-1 bg-[#ffffff] dark:bg-[#393E46] backdrop-blur-md border border-[#D65A31] dark:border-[#D65A31] text-[#222831] dark:text-[#EEEEEE] rounded-full text-sm"
           >
             {tech}
           </span>
