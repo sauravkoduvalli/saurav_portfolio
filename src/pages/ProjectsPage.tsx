@@ -156,10 +156,10 @@ const ProjectsPage = () => {
                 <div className="w-full md:flex-1 flex flex-col md:py-6 px-4">
                   <div>
                     <h3 className="text-2xl md:text-3xl font-bold mb-1 text-[#D65A31]">{projects[activeIndex].title}</h3>
-                    <h4 className="sm:text-sm md:text-lg text-[#EEEEEE] dark:text-[#EEEEEE] mb-2 font-medium">
+                    <h4 className="sm:text-sm md:text-lg text-[#222831] dark:text-[#EEEEEE] mb-2 font-medium">
                       {projects[activeIndex].subtitle}
                     </h4>
-                    <p className="text-[#b0b0b0] dark:text-[#b0b0b0] mb-4 max-w-xl">
+                    <p className="text-[#222831] dark:text-[#EEEEEE]  mb-4 max-w-xl">
                       {projects[activeIndex].description}
                     </p>
                   </div>

@@ -1,8 +1,8 @@
-import { useEffect, useState, useRef, useCallback, useTransition } from 'react';
-import type { ReactNode } from 'react';
-import ThemeControl from '../components/ThemeControl';
-import VerticalScrollNav from '../components/VerticalScrollNav';
-import Footer from '../components/Footer';
+import { useEffect, useState, useCallback, useTransition } from "react";
+import type { ReactNode } from "react";
+import ThemeControl from "../components/ThemeControl";
+import VerticalScrollNav from "../components/VerticalScrollNav";
+import Footer from "../components/Footer";
 
 interface Section {
   id: string;
@@ -16,14 +16,10 @@ interface AppLayoutProps {
 const AppLayout = ({ sections }: AppLayoutProps) => {
   const [currentSection, setCurrentSection] = useState(0);
   const [, startTransition] = useTransition();
-  const containerRef = useRef<HTMLDivElement>(null);
 
   // Intersection observer to update current section
   useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
-
-    const observer = new IntersectionObserver(
+    const observer = new window.IntersectionObserver(
       (entries) => {
         let maxRatio = 0;
         let maxIndex = 0;
@@ -37,12 +33,12 @@ const AppLayout = ({ sections }: AppLayoutProps) => {
         startTransition(() => setCurrentSection(maxIndex));
       },
       {
-        root: container,
+        root: null, // use window
         threshold: [0.5],
       }
     );
 
-    const sectionElements = container.querySelectorAll('section');
+    const sectionElements = document.querySelectorAll("section");
     sectionElements.forEach((section) => observer.observe(section));
 
     return () => observer.disconnect();
@@ -50,40 +46,31 @@ const AppLayout = ({ sections }: AppLayoutProps) => {
 
   // Native smooth scroll to section
   const scrollToSection = useCallback((index: number) => {
-    const container = containerRef.current;
-    if (!container) return;
-    const sectionElement = container.querySelector(`#${sections[index].id}`);
-    if (sectionElement) {
-      (sectionElement as HTMLElement).scrollIntoView({ behavior: 'smooth', block: 'start' });
-      startTransition(() => setCurrentSection(index));
-    } else if (index === 0) {
-      container.scrollTo({ top: 0, behavior: 'smooth' });
-      startTransition(() => setCurrentSection(0));
-    }
-  }, [sections]);
+      const sectionElement = document.getElementById(sections[index].id);
+      if (sectionElement) {
+        sectionElement.scrollIntoView({ behavior: "smooth", block: "start" });
+        startTransition(() => setCurrentSection(index));
+      } else if (index === 0) {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        startTransition(() => setCurrentSection(0));
+      }
+    },[sections]
+  );
 
   return (
-    <div className="relative h-screen w-screen overflow-hidden text-text dark:text-darkText transition-colors duration-300">
+    <div className="md:min-h-screen text-text dark:text-darkText transition-colors duration-300">
       <ThemeControl />
       <VerticalScrollNav
         sections={sections}
         currentSection={currentSection}
         onDotClick={scrollToSection}
       />
-      <div
-        ref={containerRef}
-        className="h-full w-full overflow-y-auto scroll-smooth overscroll-y-contain"
-        style={{
-          scrollbarWidth: 'none',
-          WebkitOverflowScrolling: 'touch',
-          touchAction: 'pan-y pinch-zoom',
-        }}
-      >
+      <div>
         {sections.map((section) => (
           <section
             key={section.id}
             id={section.id}
-            className="min-h-screen w-screen snap-start relative"
+            className="md:min-h-screen w-full snap-start relative"
           >
             {section.component}
           </section>
