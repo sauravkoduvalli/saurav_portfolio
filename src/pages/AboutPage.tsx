@@ -24,7 +24,7 @@ const AboutPage = () => {
   ];
 
   return (
-    <div className="min-h-screen w-full flex items-center justify-center p-4 py-16 md:p-6 lg:p-8 bg-[#EEEEEE] dark:bg-[#222831]">
+    <div className="md:min-h-screen w-full flex items-center justify-center p-4 py-16 md:p-6 lg:p-8 bg-[#EEEEEE] dark:bg-[#222831]">
       <div className="absolute inset-0" />
       <motion.div
         initial={{ opacity: 0, y: 20 }}

@@ -53,7 +53,7 @@ const ExperiencePage = () => {
   ];
 
   return (
-    <div className="min-h-screen w-full flex items-center justify-center p-4 py-16 md:p-6 lg:p-8 bg-[#EEEEEE] dark:bg-[#222831]">
+    <div className="md:min-h-screen w-full flex items-center justify-center p-4 py-16 md:p-6 lg:p-8 bg-[#EEEEEE] dark:bg-[#222831]">
       <div className="absolute inset-0" />
       <div className="w-full max-w-6xl mx-auto relative z-10">
         <motion.h2

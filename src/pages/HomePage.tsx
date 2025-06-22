@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 const HomePage = () => {
   return (
     <div className="min-h-screen w-full flex flex-col items-center justify-center p-4 md:p-6 lg:p-8 bg-[#EEEEEE] dark:bg-[#222831]">
-      <div className="absolute inset-0" />
+      <div className="absolute inset-0 pointer-events-none" />
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -64,7 +64,7 @@ const HomePage = () => {
           className="flex flex-wrap justify-center gap-4 mt-12"
         >
           <motion.a
-            whileHover={{ scale: 1.02, boxShadow: '0 20px 25px -5px #D65A31, 0 8px 10px -6px #D65A31' }}
+            whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             href="#projects"
             className="px-8 py-4 md:py-3.5 rounded-2xl bg-[#D65A31] text-[#EEEEEE] font-medium transition-all duration-300 text-lg md:text-base border border-[#D65A31] hover:bg-[#b94a25] dark:hover:bg-[#b94a25]"
@@ -72,7 +72,7 @@ const HomePage = () => {
             View My Work
           </motion.a>
           <motion.a
-            whileHover={{ scale: 1.02, boxShadow: '0 20px 25px -5px #D65A31, 0 8px 10px -6px #D65A31' }}
+            whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             href="#contact"
             className="px-8 py-3.5 rounded-2xl bg-[#EEEEEE] dark:bg-[#393E46] text-[#222831] dark:text-[#EEEEEE] font-medium border border-[#cccccc] dark:border-[#2d2d2d] transition-all duration-300"
