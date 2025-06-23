@@ -119,7 +119,7 @@ const ProjectsPage = () => {
           Projects
         </motion.h2>
         <div
-          className="relative w-full flex items-stretch overflow-hidden min-h-[400px] md:min-h-[500px] h-[60vh]"
+          className="relative w-full flex items-stretch overflow-hidden"
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
@@ -134,7 +134,7 @@ const ProjectsPage = () => {
               layout
               className="w-full h-full bg-[#ffffff] dark:bg-[#393E46] border border-[#cccccc] dark:border-[#2d2d2d] shadow-2xl rounded-xl sm:rounded-2xl md:rounded-3xl p-4 md:p-8"
             >
-              <div className="flex flex-col md:flex-row justify-around md:justify-between gap-2 md:gap-4 items-center h-full">
+              <div className="flex flex-col md:flex-row justify-around md:justify-between gap-4 md:gap-6 items-center h-full">
                 {/* Image Section - show first on mobile */}
                 <div className="w-full md:flex-[1.2] flex items-center justify-center h-auto md:h-full min-w-0 order-1 md:order-none">
                   <div className="relative w-full h-[180px] xs:h-[220px] sm:h-[260px] md:h-[400px] rounded-xl overflow-hidden bg-[#EEEEEE] dark:bg-[#393E46] border border-[#cccccc] dark:border-[#2d2d2d] flex items-center justify-center">
@@ -153,7 +153,7 @@ const ProjectsPage = () => {
                   </div>
                 </div>
                 {/* Text/Info Section */}
-                <div className="w-full md:flex-1 flex flex-col md:py-6 px-4">
+                <div className="w-full md:flex-1 flex flex-col md:py-6">
                   <div>
                     <h3 className="text-2xl md:text-3xl font-bold mb-1 text-[#D65A31]">{projects[activeIndex].title}</h3>
                     <h4 className="sm:text-sm md:text-lg text-[#222831] dark:text-[#EEEEEE] mb-2 font-medium">
