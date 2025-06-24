@@ -132,7 +132,7 @@ const ProjectsPage = () => {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.35, ease: 'easeInOut' }}
               layout
-              className="w-full h-full bg-[#ffffff] dark:bg-[#393E46] border border-[#cccccc] dark:border-[#2d2d2d] shadow-2xl rounded-xl sm:rounded-2xl md:rounded-3xl p-4 md:p-8"
+              className="w-full h-full bg-[#ffffff] dark:bg-[#393E46] border border-[#cccccc] dark:border-[#2d2d2d] shadow-2xl rounded-xl sm:rounded-2xl md:rounded-3xl p-5 md:p-8"
             >
               <div className="flex flex-col md:flex-row justify-around md:justify-between gap-4 md:gap-6 items-center h-full">
                 {/* Image Section - show first on mobile */}
