@@ -41,7 +41,7 @@ const ProjectsPage = () => {
       technologies: ["Flutter", "Bloc", "RESTful APIs", "Firebase"],
       links: {
         appStore: "https://apps.apple.com/us/app/thai-airways/id1393912966",
-        playStore: "https://apps.apple.com/us/app/thai-airways/id1393912966"
+        playStore: "https://play.google.com/store/apps/details?id=com.thaiairways.mobile&pcampaignid=web_share"
       }
     },
     {
@@ -51,7 +51,7 @@ const ProjectsPage = () => {
       image: "/assets/micops.png",
       technologies: ["React Native", "TypeScript", "Redux", "Node.js"],
       links: {
-        playStore: "https://play.google.com/store/apps/micops"
+        playStore: "https://play.google.com/store/apps/details?id=com.keralapolice.micops&pcampaignid=web_share"
       }
     }
   ];
@@ -281,6 +281,14 @@ const ProjectsPage = () => {
             </button>
           </div>
         )}
+        {/* Swipe hint for mobile/tablet */}
+        <div className="block lg:hidden mt-4 text-center text-xs text-[#888] select-none">
+          <span className="inline-flex items-center gap-1">
+            <svg className="w-4 h-4 inline-block" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" /></svg>
+            Swipe left/right to explore
+            <svg className="w-4 h-4 inline-block" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
+          </span>
+        </div>
       </div>
     </div>
   );
