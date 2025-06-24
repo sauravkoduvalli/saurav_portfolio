@@ -53,13 +53,12 @@ const ExperiencePage = () => {
   ];
 
   return (
-    <div className="md:min-h-screen w-full flex items-center justify-center p-4 py-16 md:p-6 lg:p-8 bg-[#EEEEEE] dark:bg-[#222831]">
-      <div className="absolute inset-0" />
+    <div className="min-h-screen w-full flex flex-col items-center justify-center py-16 px-4 md:px-6 lg:px-8 bg-gradient-to-br from-[#e0e7ef] via-[#f5f6fa] to-[#cfd9df] dark:from-[#232526] dark:via-[#393E46] dark:to-[#232526] relative overflow-hidden">
       <div className="w-full max-w-6xl mx-auto relative z-10">
         <motion.h2
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-4xl md:text-5xl font-bold text-center mb-16 text-[#D65A31]"
+          className="text-4xl md:text-5xl font-extrabold text-center mb-16 text-[#D65A31] drop-shadow-sm tracking-tight"
         >
           Work Experience
         </motion.h2>
@@ -70,14 +69,14 @@ const ExperiencePage = () => {
             <div key={exp.company} className="relative flex flex-col items-center md:grid md:grid-cols-2 md:gap-8">
               {/* Timeline dot above the card, except for the first card on mobile (always show on md+) */}
               <motion.div
-                className={`absolute left-1/2 -translate-x-1/2 -top-7 md:top-8 w-5 h-5 rounded-full bg-[#D65A31] z-0 border-4 border-white dark:border-[#222831] shadow-lg ${index === 0 ? 'hidden md:block' : ''}`}
+                className={`absolute left-1/2 -translate-x-1/2 -top-7 md:top-8 w-5 h-5 rounded-full bg-[#D65A31] z-0 border-4 border-white dark:border-[#232526] shadow-lg ${index === 0 ? 'hidden md:block' : ''}`}
                 whileHover={{ scale: 1.2 }}
               />
               <motion.div
                 initial={{ opacity: 0, x: 0 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.2 }}
-                className={`w-full max-w-md mx-auto p-8 rounded-3xl bg-[#ffffff] dark:bg-[#393E46] border border-[#cccccc] dark:border-[#2d2d2d] shadow-2xl text-center md:text-left z-10 mt-4 md:mt-0 ${
+                className={`w-full max-w-md mx-auto p-6 md:p-8 rounded-3xl bg-white/80 dark:bg-[#393E46]/80 border border-[#cccccc]/40 dark:border-[#2d2d2d]/40 shadow-lg backdrop-blur-md text-center md:text-left z-10 mt-4 md:mt-0 ${
                   index % 2 === 0 ? 'md:col-start-1' : 'md:col-start-2'
                 }`}
               >
@@ -109,7 +108,7 @@ const ExperiencePage = () => {
                     {exp.technologies.map((tech) => (
                       <span
                         key={tech}
-                        className="px-3 py-1 text-sm rounded-full bg-[#EEEEEE] dark:bg-[#393E46] border border-[#cccccc] dark:border-[#2d2d2d] text-[#222831] dark:text-[#EEEEEE]"
+                        className="px-3 py-1 text-sm rounded-full bg-[#EEEEEE]/60 dark:bg-[#393E46]/80 border border-[#cccccc]/40 dark:border-[#2d2d2d]/40 text-[#222831] dark:text-[#EEEEEE] shadow-md backdrop-blur-md"
                       >
                         {tech}
                       </span>

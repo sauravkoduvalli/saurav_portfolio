@@ -108,13 +108,12 @@ const ProjectsPage = () => {
   };
 
   return (
-    <div className="md:min-h-screen w-full flex items-center justify-center bg-[#EEEEEE] dark:bg-[#222831] px-6 py-12 md:py-16" id='projects'>
-      <div className="absolute inset-0" />
+    <div className="min-h-screen w-full flex flex-col items-center justify-center bg-gradient-to-br from-[#e0e7ef] via-[#f5f6fa] to-[#cfd9df] dark:from-[#232526] dark:via-[#393E46] dark:to-[#232526] py-16 px-4 md:px-6 lg:px-8 relative overflow-hidden" id='projects'>
       <div className="w-full max-w-screen-lg mx-auto relative z-10">
         <motion.h2
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-4xl md:text-5xl font-bold text-center mb-6 sm:mb-10 md:mb-14 text-[#D65A31]"
+          className="text-4xl md:text-5xl font-extrabold text-center mb-6 sm:mb-10 md:mb-14 text-[#D65A31] drop-shadow-sm tracking-tight"
         >
           Projects
         </motion.h2>
@@ -127,17 +126,17 @@ const ProjectsPage = () => {
           <AnimatePresence initial={false} mode="wait">
             <motion.div
               key={activeIndex}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
               transition={{ duration: 0.35, ease: 'easeInOut' }}
               layout
-              className="w-full h-full bg-[#ffffff] dark:bg-[#393E46] border border-[#cccccc] dark:border-[#2d2d2d] shadow-2xl rounded-xl sm:rounded-2xl md:rounded-3xl p-5 md:p-8"
+              className="w-full h-full bg-white/80 dark:bg-[#393E46]/80 border border-[#cccccc]/40 dark:border-[#2d2d2d]/40 shadow-lg backdrop-blur-md rounded-xl sm:rounded-2xl md:rounded-3xl p-5 md:p-8"
             >
               <div className="flex flex-col md:flex-row justify-around md:justify-between gap-4 md:gap-6 items-center h-full">
                 {/* Image Section - show first on mobile */}
                 <div className="w-full md:flex-[1.2] flex items-center justify-center h-auto md:h-full min-w-0 order-1 md:order-none">
-                  <div className="relative w-full h-[180px] xs:h-[220px] sm:h-[260px] md:h-[400px] rounded-xl overflow-hidden bg-[#EEEEEE] dark:bg-[#393E46] border border-[#cccccc] dark:border-[#2d2d2d] flex items-center justify-center">
+                  <div className="relative w-full h-[180px] xs:h-[220px] sm:h-[260px] md:h-[400px] rounded-xl overflow-hidden bg-[#EEEEEE]/60 dark:bg-[#393E46]/80 border border-[#cccccc]/40 dark:border-[#2d2d2d]/40 flex items-center justify-center shadow-md backdrop-blur-md">
                     {isImageLoading[projects[activeIndex].title] !== false && (
                       <div className="absolute inset-0 flex items-center justify-center">
                         <div className="w-8 h-8 border-4 border-[#D65A31] border-t-transparent rounded-full animate-spin" />
@@ -159,7 +158,7 @@ const ProjectsPage = () => {
                     <h4 className="sm:text-sm md:text-lg text-[#222831] dark:text-[#EEEEEE] mb-2 font-medium">
                       {projects[activeIndex].subtitle}
                     </h4>
-                    <p className="text-[#222831] dark:text-[#EEEEEE]  mb-4 max-w-xl">
+                    <p className="text-[#222831] dark:text-[#EEEEEE] mb-4 max-w-xl">
                       {projects[activeIndex].description}
                     </p>
                   </div>
@@ -168,7 +167,7 @@ const ProjectsPage = () => {
                       {projects[activeIndex].technologies.map((tech, index) => (
                         <span
                           key={index}
-                          className="px-2 py-0.5 text-sm rounded-full bg-[#EEEEEE] dark:bg-[#393E46] border border-[#cccccc] dark:border-[#2d2d2d] text-[#222831] dark:text-[#EEEEEE]"
+                          className="px-2 py-0.5 text-sm rounded-full bg-[#EEEEEE]/60 dark:bg-[#393E46]/80 border border-[#cccccc]/40 dark:border-[#2d2d2d]/40 text-[#222831] dark:text-[#EEEEEE] shadow-md backdrop-blur-md"
                         >
                           {tech}
                         </span>
@@ -265,9 +264,6 @@ const ProjectsPage = () => {
               onClick={() => paginate(-1)}
               className="px-4 py-2 rounded-lg bg-[#D65A31] text-[#EEEEEE] font-semibold text-sm transition-all duration-300 flex items-center gap-2 shadow-md hover:bg-[#b94a25] dark:bg-[#393E46] dark:hover:bg-[#444]"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="w-4 h-4">
-                <path fill="currentColor" d="M15.41,7.41L14,6l-6,6l6,6l1.41-1.41L9.83,12H20v-2H9.83L15.41,7.41z" />
-              </svg>
               Previous
             </button>
             <button
@@ -275,18 +271,13 @@ const ProjectsPage = () => {
               className="px-4 py-2 rounded-lg bg-[#D65A31] text-[#EEEEEE] font-semibold text-sm transition-all duration-300 flex items-center gap-2 shadow-md hover:bg-[#b94a25] dark:bg-[#393E46] dark:hover:bg-[#444]"
             >
               Next
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="w-4 h-4">
-                <path fill="currentColor" d="M8.59,16.59L10,18l6-6l-6-6l-1.41,1.41L14.17,12H4v2h10.17L8.59,16.59z" />
-              </svg>
             </button>
           </div>
         )}
         {/* Swipe hint for mobile/tablet */}
         <div className="block lg:hidden mt-4 text-center text-xs text-[#888] select-none">
           <span className="inline-flex items-center gap-1">
-            <svg className="w-4 h-4 inline-block" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" /></svg>
             Swipe left/right to explore
-            <svg className="w-4 h-4 inline-block" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
           </span>
         </div>
       </div>
