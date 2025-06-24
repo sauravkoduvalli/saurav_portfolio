@@ -15,22 +15,10 @@ interface Project {
   };
 }
 
-// Custom hook to detect desktop (non-touch) devices
-function useIsDesktop() {
-  const [isDesktop, setIsDesktop] = useState(() => window.matchMedia('(hover: hover) and (pointer: fine)').matches);
-  useEffect(() => {
-    const mq = window.matchMedia('(hover: hover) and (pointer: fine)');
-    const handler = (e: MediaQueryListEvent) => setIsDesktop(e.matches);
-    mq.addEventListener('change', handler);
-    return () => mq.removeEventListener('change', handler);
-  }, []);
-  return isDesktop;
-}
 
 const ProjectsPage = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isImageLoading, setIsImageLoading] = useState<{ [key: string]: boolean }>({});
-  const isDesktop = useIsDesktop();
 
   const projects: Project[] = [
     {
@@ -118,11 +106,28 @@ const ProjectsPage = () => {
           Projects
         </motion.h2>
         <div
-          className="relative w-full flex items-stretch overflow-hidden"
+          className="w-full flex items-stretch overflow-hidden"
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
         >
+          {/* Carousel Arrows */}
+          <button
+            aria-label="Previous project"
+            onClick={() => paginate(-1)}
+            className="absolute -left-5  top-1/2 -translate-y-1/2 z-20 bg-white/80 dark:bg-[#232526]/80 border border-[#cccccc]/40 dark:border-[#2d2d2d]/40 shadow-md rounded-full w-10 h-10 flex items-center justify-center hover:bg-[#f3f4f6] dark:hover:bg-[#393E46]/80 transition-all"
+            style={{ outline: 'none' }}
+          >
+            <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[#D65A31] dark:text-[#EEEEEE]" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6" /></svg>
+          </button>
+          <button
+            aria-label="Next project"
+            onClick={() => paginate(1)}
+            className="absolute -right-5 top-1/2 -translate-y-1/2 z-20 bg-white/80 dark:bg-[#232526]/80 border border-[#cccccc]/40 dark:border-[#2d2d2d]/40 shadow-md rounded-full w-10 h-10 flex items-center justify-center hover:bg-[#f3f4f6] dark:hover:bg-[#393E46]/80 transition-all"
+            style={{ outline: 'none' }}
+          >
+            <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[#D65A31] dark:text-[#EEEEEE]" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" /></svg>
+          </button>
           <AnimatePresence initial={false} mode="wait">
             <motion.div
               key={activeIndex}
@@ -257,28 +262,22 @@ const ProjectsPage = () => {
             </motion.div>
           </AnimatePresence>
         </div>
-        {/* Pagination / Navigation Arrows */}
-        {isDesktop && (
-          <div className="flex justify-between items-center mt-4 md:mt-6">
+        {/* Indicator Dots */}
+        <div className="flex justify-center items-center gap-4 mt-6">
+          {projects.map((_, idx) => (
             <button
-              onClick={() => paginate(-1)}
-              className="px-4 py-2 rounded-lg bg-[#D65A31] text-[#EEEEEE] font-semibold text-sm transition-all duration-300 flex items-center gap-2 shadow-md hover:bg-[#b94a25] dark:bg-[#393E46] dark:hover:bg-[#444]"
-            >
-              Previous
-            </button>
-            <button
-              onClick={() => paginate(1)}
-              className="px-4 py-2 rounded-lg bg-[#D65A31] text-[#EEEEEE] font-semibold text-sm transition-all duration-300 flex items-center gap-2 shadow-md hover:bg-[#b94a25] dark:bg-[#393E46] dark:hover:bg-[#444]"
-            >
-              Next
-            </button>
-          </div>
-        )}
-        {/* Swipe hint for mobile/tablet */}
-        <div className="block lg:hidden mt-4 text-center text-xs text-[#888] select-none">
-          <span className="inline-flex items-center gap-1">
-            Swipe left/right to explore
-          </span>
+              key={idx}
+              aria-label={`Go to project ${idx + 1}`}
+              onClick={() => setActiveIndex(idx)}
+              className={`transition-all duration-300 w-4 h-4 rounded-full border-2 focus:outline-none
+                ${activeIndex === idx
+                  ? 'border-[#D65A31] bg-[#D65A31] ring-2 ring-[#FFAB91] dark:ring-[#FF5722]'
+                  : 'border-[#cccccc] dark:border-[#2d2d2d] bg-[#EEEEEE] dark:bg-[#222831] hover:border-[#FF5722] hover:bg-[#FFCCBC] dark:hover:bg-[#BF360C]'}
+              `}
+              style={{ minHeight: 0, minWidth: 0, padding: 0 }}
+              tabIndex={0}
+            />
+          ))}
         </div>
       </div>
     </div>
