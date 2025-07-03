@@ -8,7 +8,7 @@ const socialLinks = [
     icon: <Github className="w-6 h-6 hover:text-[#D65A31] transition-colors" />,
   },
   {
-    href: "https://www.linkedin.com/in/sauravkoduvalli ",
+    href: "https://www.linkedin.com/in/sauravkoduvalli",
     label: "LinkedIn",
     icon: (
       <Linkedin className="w-6 h-6 hover:text-[#D65A31] transition-colors" />
@@ -21,31 +21,32 @@ const socialLinks = [
   },
 ];
 
+
 const Footer = () => {
   const { theme } = useTheme();
   const isDark = theme === "dark";
 
   return (
     <footer
-      className={`border-t py-6 px-4 shadow-inner transition-colors duration-300 ${
+      className={`border-t px-4 py-8 shadow-inner transition-colors duration-300 ${
         isDark
-          ? "bg-[#222831] text-[#EEEEEE] border-[#393E46]"
+          ? "bg-[#18181b] text-[#EEEEEE] border-[#232323]"
           : "bg-[#f5f5f5] text-[#222831] border-[#e0e0e0]"
       }`}
     >
-      <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+      <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
         {/* Left: Name & tagline */}
         <div className="text-center md:text-left">
-          <div className="text-xl font-bold">Saurav K</div>
+          <div className="text-2xl font-extrabold tracking-tight">Saurav K</div>
           <div
-            className={`text-sm font-medium ${
-              isDark ? "text-[#D65A31]" : "text-[#d65a31]"
+            className={`text-xs font-semibold mt-1 tracking-widest uppercase ${
+              isDark ? "text-[#b0b0b0]" : "text-[#888888]"
             }`}
           >
             Mobile App Developer
           </div>
         </div>
-        {/* Center: Nav links */}
+        {/* Center: Copyright */}
         <div
           className={`text-center text-xs ${
             isDark ? "text-[#b0b0b0]" : "text-[#888888]"
@@ -63,10 +64,10 @@ const Footer = () => {
               aria-label={link.label}
               target="_blank"
               rel="noopener noreferrer"
-              className={`transition-colors ${
+              className={`rounded-full border p-2 transition-colors duration-200 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-[#D65A31] ${
                 isDark
-                  ? "text-[#EEEEEE] hover:text-[#D65A31]"
-                  : "text-[#222831] hover:text-[#D65A31]"
+                  ? "border-[#232323] text-[#EEEEEE] hover:text-[#D65A31] hover:border-[#D65A31]"
+                  : "border-[#e0e0e0] text-[#222831] hover:text-[#D65A31] hover:border-[#D65A31]"
               }`}
             >
               {link.icon}

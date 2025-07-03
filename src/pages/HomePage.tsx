@@ -1,93 +1,122 @@
 import { motion } from 'framer-motion';
 
+const socialLinks = [
+	{
+		href: 'https://github.com/sauravkoduvalli',
+		label: 'GitHub',
+		icon: (
+			<svg
+				width="22"
+				height="22"
+				fill="none"
+				stroke="currentColor"
+				strokeWidth="1.7"
+				viewBox="0 0 24 24"
+			>
+				<path d="M12 2C6.48 2 2 6.58 2 12.26c0 4.5 2.87 8.32 6.84 9.67.5.09.68-.22.68-.48 0-.24-.01-.87-.01-1.7-2.78.62-3.37-1.36-3.37-1.36-.45-1.18-1.1-1.5-1.1-1.5-.9-.63.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.38-2.03 1.01-2.75-.1-.26-.44-1.3.1-2.7 0 0 .83-.27 2.75 1.02A9.36 9.36 0 0 1 12 6.84c.84.004 1.68.11 2.47.32 1.92-1.29 2.75-1.02 2.75-1.02.54 1.4.2 2.44.1 2.7.63.72 1.01 1.63 1.01 2.75 0 3.94-2.34 4.8-4.57 5.06.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.8 0 .26.18.57.69.47A10.01 10.01 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z" />
+			</svg>
+		),
+	},
+	{
+		href: 'https://www.linkedin.com/in/sauravkoduvalli',
+		label: 'LinkedIn',
+		icon: (
+			<svg
+				width="22"
+				height="22"
+				fill="none"
+				stroke="currentColor"
+				strokeWidth="1.7"
+				viewBox="0 0 24 24"
+			>
+				<path d="M16 8a6 6 0 0 1 6 6v6h-4v-6a2 2 0 0 0-4 0v6h-4v-6a6 6 0 0 1 6-6z" />
+				<rect width="4" height="12" x="2" y="9" rx="2" />
+				<circle cx="4" cy="4" r="2" />
+			</svg>
+		),
+	},
+	{
+		href: 'mailto:sauravkoduvalli@gmail.com',
+		label: 'Mail',
+		icon: (
+			<svg
+				width="22"
+				height="22"
+				fill="none"
+				stroke="currentColor"
+				strokeWidth="1.7"
+				viewBox="0 0 24 24"
+			>
+				<rect width="20" height="16" x="2" y="4" rx="2" />
+				<path d="m22 6-10 7L2 6" />
+			</svg>
+		),
+	},
+];
+
 const HomePage = () => {
-  return (
-    <div className="min-h-screen w-full flex flex-col items-center justify-center p-4 md:p-6 lg:p-8 bg-gradient-to-br from-[#e0e7ef] via-[#f5f6fa] to-[#cfd9df] dark:from-[#232526] dark:via-[#393E46] dark:to-[#232526] relative overflow-hidden">
-      {/* Main content card */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, type: 'spring', stiffness: 80 }}
-        className="relative z-10 text-center space-y-10 max-w-4xl w-full p-8 md:p-12 rounded-3xl bg-white/60 dark:bg-[#232526]/70 shadow-[0_8px_32px_0_rgba(31,38,135,0.15)] backdrop-blur-xl border border-[#e0e7ef]/60 dark:border-[#393E46]/60"
-        style={{ boxShadow: '0 8px 32px 0 rgba(31,38,135,0.15), 0 1.5px 6px 0 rgba(214,90,49,0.08)' }}
-      >
-        {/* Avatar with neumorphic effect */}
-        <motion.div
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ type: 'spring', stiffness: 100, delay: 0.2 }}
-          className="relative w-32 h-32 mx-auto mb-5 md:mb-7 lg:mb-9 flex items-center justify-center"
-        >
-          <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-[#D65A31]/70 to-[#f5f6fa]/60 dark:from-[#D65A31]/40 dark:to-[#393E46]/60 blur-2xl opacity-60" />
-          <div className="relative w-full h-full rounded-full bg-white/80 dark:bg-[#393E46]/80 shadow-[inset_8px_8px_24px_#e0e7ef,inset_-8px_-8px_24px_#cfd9df] dark:shadow-[inset_8px_8px_24px_#232526,inset_-8px_-8px_24px_#393E46] flex items-center justify-center border-2 border-[#D65A31]/30 dark:border-[#D65A31]/20">
-            <span className="text-5xl md:text-6xl">👨‍💻</span>
-          </div>
-        </motion.div>
-
-        {/* Name */}
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-[#D65A31] mb-3 md:mb-5 lg:mb-7 drop-shadow-sm tracking-tight"
-        >
-          Saurav K
-        </motion.h1>
-
-        {/* Subtitle */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="text-lg md:text-2xl text-[#222831] dark:text-[#EEEEEE] font-medium tracking-wide mb-3 md:mb-4"
-        >
-          Mobile App Developer
-        </motion.p>
-
-        {/* Skills badges with glass effect */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.5 }}
-          className="flex flex-wrap justify-center gap-4 md:gap-6 text-base md:text-lg mb-4 md:mb-7 lg:mb-9"
-        >
-          <span className="px-5 py-2 rounded-full bg-white/50 dark:bg-[#393E46]/60 border border-[#cccccc]/40 dark:border-[#2d2d2d]/40 text-[#4a4a4a] dark:text-[#b0b0b0] flex items-center gap-2 shadow-md backdrop-blur-md">
-            <span className="w-2 h-2 rounded-full bg-[#D65A31]"></span>
-            Flutter
-          </span>
-          <span className="px-5 py-2 rounded-full bg-white/50 dark:bg-[#393E46]/60 border border-[#cccccc]/40 dark:border-[#2d2d2d]/40 text-[#4a4a4a] dark:text-[#b0b0b0] flex items-center gap-2 shadow-md backdrop-blur-md">
-            <span className="w-2 h-2 rounded-full bg-[#D65A31]"></span>
-            React Native
-          </span>
-        </motion.div>
-
-        {/* CTA Buttons with glassmorphic/neumorphic style */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.6 }}
-          className="flex flex-wrap justify-center gap-4 mt-4 md:mt-7 lg:mt-9 mb-2 md:mb-7 lg:mb-9"
-        >
-          <motion.a
-            whileHover={{ scale: 1.04, boxShadow: '0 4px 24px 0 rgba(214,90,49,0.18)' }}
-            whileTap={{ scale: 0.98 }}
-            href="#projects"
-            className="px-8 py-4 md:py-3.5 rounded-2xl bg-gradient-to-tr from-[#D65A31] to-[#fbbf24] text-white font-semibold transition-all duration-300 text-sm md:text-base border border-[#D65A31]/70 shadow-lg hover:from-[#b94a25] hover:to-[#fbbf24] dark:hover:from-[#b94a25] dark:hover:to-[#fbbf24] backdrop-blur-md"
-          >
-            View My Work
-          </motion.a>
-          <motion.a
-            whileHover={{ scale: 1.04, boxShadow: '0 4px 24px 0 rgba(34,40,49,0.12)' }}
-            whileTap={{ scale: 0.98 }}
-            href="#contact"
-            className="px-8 py-3.5 rounded-2xl bg-white/60 dark:bg-[#393E46]/80 text-[#222831] dark:text-[#EEEEEE] font-semibold text-sm md:text-base border border-[#cccccc]/60 dark:border-[#2d2d2d]/60 shadow-lg transition-all duration-300 backdrop-blur-md"
-          >
-            Get in Touch
-          </motion.a>
-        </motion.div>
-      </motion.div>
-    </div>
-  );
+	return (
+		<div className="min-h-screen w-full flex flex-col items-start justify-center bg-white text-black dark:bg-[#18181b] dark:text-white px-4">
+			<div className="w-full max-w-5xl px-4 md:px-8 lg:pl-16 flex flex-col items-start justify-center min-h-[80vh]">
+				{/* Avatar */}
+				<div className="mb-8">
+					<img
+						src="/assets/portfolio.png"
+						alt="Saurav K avatar"
+						className="w-20 h-20 rounded-full object-cover border-2 border-white dark:border-[#232323] shadow"
+					/>
+				</div>
+				{/* Heading */}
+				<motion.h1
+					initial={{ opacity: 0, y: 20 }}
+					animate={{ opacity: 1, y: 0 }}
+					transition={{ duration: 0.5 }}
+					className="max-w-4xl text-4xl md:text-6xl font-extrabold leading-tight mb-6 text-left"
+				>
+					Cross-platform developer, full-stack learner.
+				</motion.h1>
+				{/* Subtext */}
+				<motion.p
+					initial={{ opacity: 0, y: 20 }}
+					animate={{ opacity: 1, y: 0 }}
+					transition={{ duration: 0.5, delay: 0.1 }}
+					className="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-8 text-left"
+				>
+					I'm Saurav, a mobile and web application developer based in Kochi, Kerala. With over 4.6 years of experience, I build scalable cross-platform apps using Flutter, React Native, and React.js. I'm passionate about crafting clean UIs, integrating robust backends, and transitioning toward full-stack development.
+				</motion.p>
+				{/* CTA Buttons */}
+				<div className="flex flex-wrap gap-4 mb-8">
+					<a
+						href="#projects"
+						className="px-6 py-2 rounded-full bg-black text-white dark:bg-white dark:text-black font-semibold shadow hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors"
+					>
+						View My Work
+					</a>
+					<a
+						href="#contact"
+						className="px-6 py-2 rounded-full border border-black dark:border-white text-black dark:text-white font-semibold hover:bg-gray-100 dark:hover:bg-[#232323] transition-colors"
+					>
+						Get in Touch
+					</a>
+				</div>
+				{/* Social Icons */}
+				<div className="flex gap-6 mt-2">
+					{socialLinks.map((link) => (
+						<a
+							key={link.label}
+							href={link.href}
+							target="_blank"
+							rel="noopener noreferrer"
+							aria-label={link.label}
+							className="text-2xl text-gray-500 hover:text-black dark:hover:text-white transition-colors"
+						>
+							{link.icon}
+						</a>
+					))}
+				</div>
+			</div>
+		</div>
+	);
 };
 
 export default HomePage;

@@ -26,28 +26,34 @@ export default function ThemeToggle() {
     >
       <button
         onClick={toggleTheme}
-        className="relative flex items-center w-12 h-7 sm:w-16 sm:h-9 px-1 sm:px-2 rounded-full transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-violet-400 focus:ring-offset-2 shadow-xl bg-[#EEEEEE] dark:bg-[#222831] border border-[#cccccc] dark:border-[#2d2d2d] hover:shadow-[0_0_16px_2px_rgba(139,92,246,0.25)] group"
+        className={`relative flex items-center w-12 h-7 sm:w-16 sm:h-9 px-1 sm:px-2 rounded-full transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 shadow-xl
+          ${isDark ? 'bg-[#18181b] border-[#393E46] focus:ring-white' : 'bg-white border-[#cccccc] focus:ring-black'}
+          border group`}
         aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
         title={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
         style={{ minWidth: 48 }}
       >
         {/* Moon icon on the left, only in dark mode, outside the knob */}
         {isDark && (
-          <span className="z-10 text-base sm:text-lg select-none text-[#a78bfa] mr-auto">🌙</span>
+          <span className="z-10 text-base sm:text-lg select-none text-white mr-auto">🌙</span>
         )}
         {/* Sun icon on the right, only in light mode, outside the knob */}
         {!isDark && (
-          <span className="z-10 text-base sm:text-lg select-none text-[#fbbf24] ml-auto">☀️</span>
+          <span className="z-10 text-base sm:text-lg select-none text-black ml-auto">☀️</span>
         )}
         {/* Toggle knob, slides to the icon */}
         <motion.span
-          className="absolute top-1/2 left-1 sm:left-2 w-5 h-5 sm:w-7 sm:h-7 rounded-full bg-[#f9fafb] dark:bg-[#161622] shadow-md border border-[#dcdcdc] dark:border-[#2a2a3d] backdrop-blur-lg -translate-y-1/2"
+          className={`absolute top-1/2 left-1 sm:left-2 w-5 h-5 sm:w-7 sm:h-7 rounded-full shadow-md border backdrop-blur-lg -translate-y-1/2
+            ${isDark ? 'bg-[#393E46] border-[#393E46]' : 'bg-[#EEEEEE] border-[#cccccc]'}
+          `}
           initial={false}
           animate={{ x: getKnobX(isDark) }}
           transition={{ type: 'spring', stiffness: 400, damping: 30 }}
         />
         {/* Glow effect on hover */}
-        <span className="absolute inset-0 rounded-full pointer-events-none group-hover:shadow-[0_0_24px_4px_rgba(139,92,246,0.25)] transition-all duration-300" />
+        <span className={`absolute inset-0 rounded-full pointer-events-none transition-all duration-300
+          ${isDark ? 'group-hover:shadow-[0_0_24px_4px_rgba(255,255,255,0.10)]' : 'group-hover:shadow-[0_0_24px_4px_rgba(0,0,0,0.10)]'}`}
+        />
       </button>
     </div>
   );

@@ -25,15 +25,15 @@ const VerticalScrollNav: React.FC<VerticalScrollNavProps> = ({
         onClick={() => onDotClick(idx)}
         className={`transition-all duration-300 w-4 h-4 rounded-full border-2 focus:outline-none
           ${currentSection === idx
-            ? 'border-[#D65A31] bg-[#D65A31] ring-2 ring-[#FFAB91] dark:ring-[#FF5722]'
-            : 'border-[#cccccc] dark:border-[#2d2d2d] bg-[#EEEEEE] dark:bg-[#222831] hover:border-[#FF5722] hover:bg-[#FFCCBC] dark:hover:bg-[#BF360C]'}
+            ? 'border-black dark:border-white bg-black dark:bg-white ring-2 ring-black dark:ring-white'
+            : 'border-[#cccccc] dark:border-[#393E46] bg-white dark:bg-[#18181b] hover:border-black dark:hover:border-white hover:bg-[#222831] dark:hover:bg-white'}
         `}
         style={{minHeight: 0, minWidth: 0}}
         tabIndex={0}
       />
     ))}
     {/* Optional mouse icon as scroll hint */}
-    <div className="mt-6 animate-bounce text-[#9ca3af] dark:text-[#6b7280]">
+    <div className="mt-6 animate-bounce text-[#222831] dark:text-[#EEEEEE]">
       <svg
         width="24"
         height="36"

@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { useTheme } from '../contexts/useThemeContext';
 
 interface Skill {
   name: string;
@@ -9,8 +10,67 @@ interface Skill {
 interface SkillCategory {
   title: string;
   skills: Skill[];
-  color: string;
 }
+
+// Circular progress ring component
+const SkillRing = ({
+  percent,
+  size = 56,
+  stroke = 6,
+  children,
+}: {
+  percent: number;
+  size?: number;
+  stroke?: number;
+  children: React.ReactNode;
+}) => {
+  const radius = (size - stroke) / 2;
+  const circumference = 2 * Math.PI * radius;
+  const offset = circumference * (1 - percent / 100);
+  const { theme } = useTheme();
+  const accent = theme === 'dark' ? 'white' : 'gray';
+  const baseStroke = theme === 'dark' ? 'gray' : 'white';
+  return (
+    <svg
+      width={size}
+      height={size}
+      className="block mx-auto"
+      style={{ display: 'block' }}
+    >
+      <circle
+        cx={size / 2}
+        cy={size / 2}
+        r={radius}
+        fill="none"
+        stroke={baseStroke}
+        strokeWidth={stroke}
+      />
+      <motion.circle
+        cx={size / 2}
+        cy={size / 2}
+        r={radius}
+        fill="none"
+        stroke={accent}
+        strokeWidth={stroke}
+        strokeDasharray={circumference}
+        strokeDashoffset={circumference}
+        animate={{ strokeDashoffset: offset }}
+        transition={{ duration: 1 }}
+        strokeLinecap="round"
+      />
+      <foreignObject
+        x={stroke}
+        y={stroke}
+        width={size - stroke * 2}
+        height={size - stroke * 2}
+      >
+        <div className="w-full h-full flex items-center justify-center text-2xl select-none">
+          {children}
+        </div>
+      </foreignObject>
+    </svg>
+  );
+};
 
 const SkillsPage = () => {
   const skillCategories: SkillCategory[] = [
@@ -22,7 +82,6 @@ const SkillsPage = () => {
         { name: 'Dart', level: 90, icon: '💠' },
         { name: 'Kotlin', level: 80, icon: '🟣' },
       ],
-      color: 'from-[#8B5CF6] to-[#3B82F6] dark:from-[#8B5CF6] dark:to-[#3B82F6]',
     },
     {
       title: 'Frameworks',
@@ -31,7 +90,6 @@ const SkillsPage = () => {
         { name: 'React Native', level: 90, icon: '⚛️' },
         { name: 'React.js', level: 85, icon: '🌐' },
       ],
-      color: 'from-[#3B82F6] to-[#6366F1] dark:from-[#3B82F6] dark:to-[#6366F1]',
     },
     {
       title: 'Tools & Platforms',
@@ -41,75 +99,50 @@ const SkillsPage = () => {
         { name: 'CI/CD', level: 80, icon: '🚀' },
         { name: 'Figma', level: 75, icon: '🎨' },
       ],
-      color: 'from-[#6366F1] to-[#8B5CF6] dark:from-[#6366F1] dark:to-[#8B5CF6]',
     },
   ];
 
+  // Flatten all skills for grid
+  const allSkills = skillCategories.flatMap((cat) =>
+    cat.skills.map((skill) => ({ ...skill, category: cat.title }))
+  );
+
   return (
-    <div className="min-h-screen w-full flex flex-col items-center justify-center py-16 px-4 md:px-6 lg:px-8 bg-gradient-to-br from-[#e0e7ef] via-[#f5f6fa] to-[#cfd9df] dark:from-[#232526] dark:via-[#393E46] dark:to-[#232526] relative overflow-hidden">
-      <motion.h2
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="text-4xl md:text-5xl font-extrabold text-center mb-10 text-[#D65A31] drop-shadow-sm tracking-tight"
-      >
-        Skills & Technologies
-      </motion.h2>
-
-      <div className="grid gap-8 w-full max-w-5xl grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-        {skillCategories.map((category, categoryIndex) => (
-          <motion.div
-            key={category.title}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: categoryIndex * 0.2 }}
-            className="p-6 md:p-8 rounded-3xl bg-white/80 dark:bg-[#393E46]/80 border border-[#cccccc]/40 dark:border-[#2d2d2d]/40 shadow-lg backdrop-blur-md flex flex-col gap-6"
-          >
-            <div className="flex items-center gap-3 mb-2">
-              <div
-                className={`h-2 w-16 rounded-full bg-gradient-to-r ${category.color}`}
-              />
-              <h3 className="text-xl font-bold text-[#222831] dark:text-[#EEEEEE]">
-                {category.title}
-              </h3>
-            </div>
-
-            <div className="flex flex-col gap-6">
-              {category.skills.map((skill, skillIndex) => (
-                <motion.div
-                  key={skill.name}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{
-                    delay: categoryIndex * 0.2 + skillIndex * 0.1,
-                  }}
-                >
-                  <div className="flex items-center justify-between mb-1 flex-wrap gap-2">
-                    <div className="flex items-center gap-2 min-w-0">
-                      <span className="text-xl">{skill.icon}</span>
-                      <span className="font-medium text-[#4a4a4a] dark:text-[#b0b0b0] truncate">
-                        {skill.name}
-                      </span>
-                    </div>
-                    <span className="text-sm text-[#4a4a4a] dark:text-[#b0b0b0]">
-                      {skill.level}%
-                    </span>
-                  </div>
-                  <div className="h-2 bg-[#EEEEEE]/60 dark:bg-[#393E46]/80 rounded-full overflow-hidden border border-[#cccccc]/40 dark:border-[#2d2d2d]/40">
-                    <motion.div
-                      initial={{ width: 0 }}
-                      animate={{ width: `${skill.level}%` }}
-                      transition={{
-                        duration: 1,
-                        delay: categoryIndex * 0.2 + skillIndex * 0.1,
-                      }}
-                      className="h-full rounded-full bg-[#D65A31]"
-                    />
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        ))}
+    <div className="min-h-screen w-full flex flex-col items-center justify-center bg-white text-black dark:bg-[#18181b] dark:text-white px-4 py-16">
+      <div className="w-full max-w-5xl px-4 md:px-8 flex flex-col items-center justify-center min-h-[80vh]">
+        <motion.h2
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-3xl md:text-5xl font-extrabold mb-10 text-center"
+        >
+          Tech Stack
+        </motion.h2>
+        <div className="grid gap-8 w-full max-w-5xl grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+          {allSkills.map((skill, i) => (
+            <motion.div
+              key={skill.name}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.08 }}
+              className="flex flex-col items-center p-4 rounded-2xl bg-white dark:bg-[#232323] border border-gray-200 dark:border-[#232323] shadow-sm"
+            >
+              <SkillRing percent={skill.level}>
+                <span>{skill.icon}</span>
+              </SkillRing>
+              <div className="mt-3 text-center">
+                <div className="font-semibold text-gray-800 dark:text-gray-200 text-base truncate">
+                  {skill.name}
+                </div>
+                <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                  {skill.level}%
+                </div>
+                <div className="text-xs text-gray-400 dark:text-gray-500 mt-1">
+                  {skill.category}
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </div>
   );

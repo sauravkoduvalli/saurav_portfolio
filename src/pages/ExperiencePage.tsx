@@ -1,3 +1,4 @@
+
 import { motion } from 'framer-motion';
 
 interface Experience {
@@ -9,106 +10,107 @@ interface Experience {
   technologies: string[];
 }
 
-const ExperiencePage = () => {
-  const experiences: Experience[] = [
-    {
-      company: "TCS",
-      role: "Mobile App Developer",
-      period: "2023 - Present",
-      location: "Kochi, India",
-      description: [
-        "Lead developer for multiple client projects using Flutter and React Native",
-        "Successfully delivered high-performance mobile applications with complex UI/UX",
-        "Collaborated with cross-functional teams across different time zones",
-        "Mentored junior developers and conducted code reviews"
-      ],
-      technologies: ["Flutter", "React Native", "Firebase", "RESTful APIs"]
-    },
-    {
-      company: "ASDesigns",
-      role: "Flutter Developer",
-      period: "2022 - 2023",
-      location: "Kochi, India",
-      description: [
-        "Developed and maintained multiple Flutter applications",
-        "Implemented complex state management solutions",
-        "Integrated third-party services and APIs",
-        "Optimized app performance and reduced load times"
-      ],
-      technologies: ["Flutter", "Bloc", "Firebase", "REST APIs"]
-    },
-    {
-      company: "Techtern",
-      role: "Mobile App Development Intern",
-      period: "2022",
-      location: "Remote",
-      description: [
-        "Assisted in developing mobile applications using Flutter",
-        "Learned and implemented modern mobile development practices",
-        "Contributed to UI/UX improvements",
-        "Participated in daily stand-ups and sprint planning"
-      ],
-      technologies: ["Flutter", "Git", "UI/UX", "Agile"]
-    }
-  ];
 
+const experiences: Experience[] = [
+  {
+    company: "TCS",
+    role: "Mobile App Developer",
+    period: "2023 - Present",
+    location: "Kochi, India",
+    description: [
+      "Lead developer for multiple client projects using Flutter and React Native",
+      "Successfully delivered high-performance mobile applications with complex UI/UX",
+      "Collaborated with cross-functional teams across different time zones",
+      "Mentored junior developers and conducted code reviews"
+    ],
+    technologies: ["Flutter", "React Native", "Firebase", "RESTful APIs"]
+  },
+  {
+    company: "ASDesigns",
+    role: "Flutter Developer",
+    period: "2022 - 2023",
+    location: "Kochi, India",
+    description: [
+      "Developed and maintained multiple Flutter applications",
+      "Implemented complex state management solutions",
+      "Integrated third-party services and APIs",
+      "Optimized app performance and reduced load times"
+    ],
+    technologies: ["Flutter", "Bloc", "Firebase", "REST APIs"]
+  },
+  {
+    company: "Techtern",
+    role: "Mobile App Development Intern",
+    period: "2022",
+    location: "Remote",
+    description: [
+      "Assisted in developing mobile applications using Flutter",
+      "Learned and implemented modern mobile development practices",
+      "Contributed to UI/UX improvements",
+      "Participated in daily stand-ups and sprint planning"
+    ],
+    technologies: ["Flutter", "Git", "UI/UX", "Agile"]
+  }
+];
+
+const ExperiencePage = () => {
   return (
-    <div className="min-h-screen w-full flex flex-col items-center justify-center py-16 px-4 md:px-6 lg:px-8 bg-gradient-to-br from-[#e0e7ef] via-[#f5f6fa] to-[#cfd9df] dark:from-[#232526] dark:via-[#393E46] dark:to-[#232526] relative overflow-hidden">
-      <div className="w-full max-w-6xl mx-auto relative z-10">
+    <div className="min-h-screen w-full flex flex-col items-center justify-center bg-white dark:bg-[#18181b] text-[#232326] dark:text-[#e5e5e5] px-4 py-16">
+      <div className="w-full max-w-5xl px-4 md:px-8 flex flex-col items-center justify-center">
         <motion.h2
-          initial={{ opacity: 0, y: -20 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-4xl md:text-5xl font-extrabold text-center mb-16 text-[#D65A31] drop-shadow-sm tracking-tight"
+          transition={{ duration: 0.5 }}
+          className="text-4xl md:text-6xl font-extrabold leading-tight mb-6 text-center text-[#232326] dark:text-[#e5e5e5]"
         >
           Work Experience
         </motion.h2>
-        <div className="relative flex flex-col gap-10 mt-8 px-4">
-          {/* Timeline vertical line: starts lower on mobile, full height on md+ */}
-          <div className="absolute left-1/2 top-[2.5rem] md:top-0 bottom-0 w-0.5 bg-[#D65A31] dark:bg-[#D65A31] transform -translate-x-1/2 z-0 transition-all duration-300" />
-          {experiences.map((exp, index) => (
-            <div key={exp.company} className="relative flex flex-col items-center md:grid md:grid-cols-2 md:gap-8">
-              {/* Timeline dot above the card, except for the first card on mobile (always show on md+) */}
+        <p className="mb-14 text-lg md:text-xl text-[#6b6b6b] dark:text-[#b0b0b0] text-center max-w-2xl">
+          A timeline of my professional journey, projects, and the skills I've honed along the way.
+        </p>
+        <div className="relative w-full">
+          {/* Timeline vertical line (hidden on small screens) */}
+          <div className="absolute left-[18%] md:left-1/5 top-0 bottom-0 w-px bg-[#ececec] dark:bg-[#232323] hidden sm:block" />
+          <div className="flex flex-col divide-y divide-[#ececec] dark:divide-[#232323]">
+            {experiences.map((exp, idx) => (
               <motion.div
-                className={`absolute left-1/2 -translate-x-1/2 -top-7 md:top-8 w-5 h-5 rounded-full bg-[#D65A31] z-0 border-4 border-white dark:border-[#232526] shadow-lg ${index === 0 ? 'hidden md:block' : ''}`}
-                whileHover={{ scale: 1.2 }}
-              />
-              <motion.div
-                initial={{ opacity: 0, x: 0 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
-                className={`w-full max-w-md mx-auto p-6 md:p-8 rounded-3xl bg-white/80 dark:bg-[#393E46]/80 border border-[#cccccc]/40 dark:border-[#2d2d2d]/40 shadow-lg backdrop-blur-md text-center md:text-left z-10 mt-4 md:mt-0 ${
-                  index % 2 === 0 ? 'md:col-start-1' : 'md:col-start-2'
-                }`}
+                key={exp.company}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: idx * 0.15 }}
+                className="relative flex flex-col sm:flex-row py-8 sm:py-10"
               >
-                <div className="space-y-6">
-                  <div>
-                    <h3 className="text-2xl font-bold text-[#D65A31]">{exp.role}</h3>
-                    <p className="text-lg font-medium text-[#222831] dark:text-[#EEEEEE]">{exp.company}</p>
-                    <div className="flex flex-col items-center md:flex-row md:items-center gap-1 md:gap-3 text-sm text-[#4a4a4a] dark:text-[#b0b0b0] mt-1">
-                      <span>{exp.period}</span>
-                      <span className="hidden md:inline">•</span>
-                      <span>{exp.location}</span>
-                    </div>
+                {/* Date */}
+                <div className="w-full sm:w-1/5 flex flex-row sm:flex-col items-start sm:items-end justify-between sm:pr-6 pr-0 mb-2 sm:mb-0 relative z-10">
+                  <span className="text-sm md:text-base text-[#6b6b6b] dark:text-[#b0b0b0] whitespace-nowrap">{exp.period}</span>
+                </div>
+                {/* Dot (hidden on xs) */}
+                <div className="relative flex flex-col items-center" style={{width: '0'}}>
+                  <span className="hidden sm:block w-3 h-3 rounded-full bg-[#00e6a2] border-4 border-white dark:border-[#18181b] shadow absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2" />
+                </div>
+                {/* Content */}
+                <div className="w-full sm:w-4/5 pl-0 sm:pl-10">
+                  <div className="flex flex-col md:flex-row md:items-center md:gap-4 mb-1">
+                    <h3 className="text-lg md:text-xl font-bold text-[#232326] dark:text-[#e5e5e5]">{exp.role}</h3>
+                    <span className="hidden md:inline text-[#b0b0b0]">@</span>
+                    <span className="text-base font-medium text-[#b0b0b0]">{exp.company}</span>
                   </div>
-                  <ul className="space-y-3">
+                  <div className="flex flex-wrap items-center gap-3 text-xs font-medium text-[#6b6b6b] dark:text-[#b0b0b0] mb-2">
+                    <span>{exp.location}</span>
+                  </div>
+                  <ul className="mb-2 space-y-1">
                     {exp.description.map((item, i) => (
-                      <motion.li
-                        key={i}
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 0.3 + i * 0.1 }}
-                        className="flex items-start gap-3 group justify-center md:justify-start"
-                      >
-                        <span className="text-[#D65A31] mt-1.5">•</span>
-                        <span className="text-[#222831] dark:text-[#EEEEEE] group-hover:text-[#222831] dark:group-hover:text-[#EEEEEE] transition-colors">{item}</span>
-                      </motion.li>
+                      <li key={i} className="flex items-start gap-2 text-[#232326] dark:text-[#cccccc]">
+                        <span className="text-[#00e6a2] mt-1.5">•</span>
+                        <span>{item}</span>
+                      </li>
                     ))}
                   </ul>
-                  <div className="flex flex-wrap justify-center md:justify-start gap-2">
+                  <div className="flex flex-wrap gap-2 mt-2">
                     {exp.technologies.map((tech) => (
                       <span
                         key={tech}
-                        className="px-3 py-1 text-sm rounded-full bg-[#EEEEEE]/60 dark:bg-[#393E46]/80 border border-[#cccccc]/40 dark:border-[#2d2d2d]/40 text-[#222831] dark:text-[#EEEEEE] shadow-md backdrop-blur-md"
+                        className="px-3 py-1 text-xs rounded-full bg-[#f3f3f3] dark:bg-[#29292c] border border-[#ececec] dark:border-[#35363a] text-[#00b386] dark:text-[#00e6a2] font-semibold shadow-sm"
                       >
                         {tech}
                       </span>
@@ -116,8 +118,8 @@ const ExperiencePage = () => {
                   </div>
                 </div>
               </motion.div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </div>

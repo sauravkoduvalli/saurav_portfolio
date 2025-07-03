@@ -1,111 +1,122 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import type { FormEvent } from 'react';
+import { Github, Linkedin, Mail, MapPin } from "lucide-react";
+import { useTheme } from "../contexts/useThemeContext";
+
+
+const socialLinks = [
+  {
+    href: "https://github.com/sauravkoduvalli",
+    label: "GitHub",
+    icon: <Github className="w-6 h-6" />,
+  },
+  {
+    href: "https://www.linkedin.com/in/sauravkoduvalli/",
+    label: "LinkedIn",
+    icon: <Linkedin className="w-6 h-6" />,
+  },
+  {
+    href: "mailto:sauravkoduvalli@gmail.com",
+    label: "Email",
+    icon: <Mail className="w-6 h-6" />,
+  },
+];
 
 const ContactPage = () => {
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: ''
+    name: "",
+    email: "",
+    message: "",
   });
-
-  const socialLinks = [
-    {
-      name: "GitHub",
-      url: "https://github.com/sauravkoduvalli",
-      icon: "📂"
-    },
-    {
-      name: "LinkedIn",
-      url: "https://www.linkedin.com/in/sauravkoduvalli/",
-      icon: "💼"
-    },
-    {
-      name: "Email",
-      url: "mailto:sauravkoduvalli@gmail.com",
-      icon: "📧"
-    }
-  ];
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     // Handle form submission here
-    console.log('Form submitted:', formData);
+    console.log("Form submitted:", formData);
   };
 
+
   return (
-    <div className="min-h-screen w-full flex flex-col items-center justify-center py-16 px-4 md:px-6 lg:px-8 bg-gradient-to-br from-[#e0e7ef] via-[#f5f6fa] to-[#cfd9df] dark:from-[#232526] dark:via-[#393E46] dark:to-[#232526] relative overflow-hidden" id='contact'>
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        className="w-full max-w-5xl relative z-10"
-      >
+    <div
+      id="contact"
+      className={`min-h-screen w-full flex flex-col items-center justify-center px-4 py-16 transition-colors duration-300 ${
+        isDark ? "bg-[#18181b] text-[#EEEEEE]" : "bg-[#f5f5f5] text-[#222831]"
+      }`}
+    >
+      <div className="w-full max-w-5xl px-4 md:px-8 flex flex-col items-center justify-center min-h-[80vh]">
         <motion.h2
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-4xl md:text-5xl font-extrabold text-center mb-12 text-[#D65A31] drop-shadow-sm tracking-tight"
+          className="text-4xl md:text-6xl font-extrabold mb-12 text-center tracking-tight"
         >
-          Get in Touch
+          Contact
         </motion.h2>
-
-        <div className="grid md:grid-cols-2 gap-8 items-start">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 w-full max-w-4xl">
           {/* Contact Information */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
+            initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.2 }}
-            className="p-6 md:p-8 rounded-3xl bg-white/80 dark:bg-[#393E46]/80 border border-[#cccccc]/40 dark:border-[#2d2d2d]/40 shadow-lg backdrop-blur-md"
+            transition={{ delay: 0.15 }}
+            className={`rounded-2xl border shadow-lg p-10 flex flex-col gap-10 justify-center transition-colors duration-300 ${
+              isDark
+                ? "bg-[#232323] border-[#393E46] text-[#EEEEEE]"
+                : "bg-white border-[#e0e0e0] text-[#222831]"
+            }`}
           >
-            <h3 className="text-2xl font-bold text-[#222831] dark:text-[#EEEEEE] mb-8">Contact Information</h3>
-            
-            <div className="space-y-8">
-              <div>
-                <h4 className="text-lg font-semibold text-[#222831] dark:text-[#EEEEEE] mb-2">Location</h4>
-                <p className="text-[#4a4a4a] dark:text-[#b0b0b0] flex items-center gap-2">
-                  <span className="text-xl">📍</span> Kochi, India
-                </p>
+            <div className="flex flex-col gap-4">
+              <h3 className="text-2xl font-bold mb-2">Contact Info</h3>
+              <div className="flex items-center gap-3 text-base font-medium">
+                <MapPin className="w-5 h-5 opacity-80" />
+                <span>Kochi, India</span>
               </div>
-
-              <div>
-                <h4 className="text-lg font-semibold text-[#222831] dark:text-[#EEEEEE] mb-4">Connect with me</h4>
-                <div className="space-y-4">
-                  {socialLinks.map((link) => (
-                    <motion.a
-                      key={link.name}
-                      href={link.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-3 text-[#4a4a4a] dark:text-[#b0b0b0] hover:text-[#D65A31] dark:hover:text-[#D65A31] transition-colors group"
-                      whileHover={{ x: 10 }}
-                    >
-                      <span className="text-2xl group-hover:scale-110 transition-transform">{link.icon}</span>
-                      <span>{link.name}</span>
-                    </motion.a>
-                  ))}
-                </div>
+            </div>
+            <div className="flex flex-col gap-4 mt-4">
+              <h4 className="text-base font-semibold">Connect</h4>
+              <div className="flex flex-row gap-5 mt-1">
+                {socialLinks.map((link) => (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    aria-label={link.label}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`rounded-full p-2 border transition-colors duration-200 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-[#D65A31] ${
+                      isDark
+                        ? "border-[#393E46] text-[#EEEEEE] hover:text-[#D65A31] hover:border-[#D65A31]"
+                        : "border-[#e0e0e0] text-[#222831] hover:text-[#D65A31] hover:border-[#D65A31]"
+                    }`}
+                  >
+                    {link.icon}
+                  </a>
+                ))}
               </div>
-
-              <div className="pt-6 border-t border-[#cccccc]/40 dark:border-[#2d2d2d]/40">
-                <p className="text-[#4a4a4a] dark:text-[#b0b0b0] text-sm leading-relaxed">
-                  Looking forward to discussing your project or opportunity.
-                  Feel free to reach out through any of the channels above.
-                </p>
-              </div>
+            </div>
+            <div className="pt-6 border-t text-sm leading-relaxed transition-colors duration-300" style={{ borderColor: isDark ? '#393E46' : '#e0e0e0' }}>
+              <p className={isDark ? "text-[#b0b0b0]" : "text-[#888888]"}>
+                I look forward to discussing your project or opportunity.<br />
+                Feel free to reach out through any of the channels above.
+              </p>
             </div>
           </motion.div>
 
           {/* Contact Form */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
+            initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.3 }}
-            className="p-6 md:p-8 rounded-3xl bg-white/80 dark:bg-[#393E46]/80 border border-[#cccccc]/40 dark:border-[#2d2d2d]/40 shadow-lg backdrop-blur-md"
+            transition={{ delay: 0.2 }}
+            className={`rounded-2xl border shadow-lg p-10 flex flex-col justify-center transition-colors duration-300 ${
+              isDark
+                ? "bg-[#232323] border-[#393E46] text-[#EEEEEE]"
+                : "bg-white border-[#e0e0e0] text-[#222831]"
+            }`}
           >
-            <h3 className="text-2xl font-bold text-[#222831] dark:text-[#EEEEEE] mb-8">Send a Message</h3>
-            
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <h3 className="text-2xl font-bold mb-8">Send a Message</h3>
+            <form onSubmit={handleSubmit} className="flex flex-col gap-7">
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-[#4a4a4a] dark:text-[#b0b0b0] mb-2">
+                <label htmlFor="name" className={`block text-xs font-semibold mb-2 uppercase tracking-wider ${isDark ? "text-[#b0b0b0]" : "text-[#888888]"}`}>
                   Name
                 </label>
                 <input
@@ -113,13 +124,18 @@ const ContactPage = () => {
                   id="name"
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full px-4 py-2.5 rounded-xl bg-[#EEEEEE]/60 dark:bg-[#393E46]/60 border border-[#cccccc]/40 dark:border-[#2d2d2d]/40 text-[#222831] dark:text-[#EEEEEE] focus:outline-none focus:ring-2 focus:ring-[#D65A31] focus:border-transparent transition-all backdrop-blur-sm shadow-sm"
+                  className={`w-full px-4 py-3 rounded-lg border bg-transparent focus:outline-none focus:ring-2 focus:ring-[#D65A31] transition-all shadow-sm ${
+                    isDark
+                      ? "border-[#393E46] text-[#EEEEEE] placeholder:text-[#888888]"
+                      : "border-[#e0e0e0] text-[#222831] placeholder:text-[#b0b0b0]"
+                  }`}
                   required
+                  autoComplete="off"
+                  placeholder="Your name"
                 />
               </div>
-
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-[#4a4a4a] dark:text-[#b0b0b0] mb-2">
+                <label htmlFor="email" className={`block text-xs font-semibold mb-2 uppercase tracking-wider ${isDark ? "text-[#b0b0b0]" : "text-[#888888]"}`}>
                   Email
                 </label>
                 <input
@@ -127,36 +143,50 @@ const ContactPage = () => {
                   id="email"
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="w-full px-4 py-2.5 rounded-xl bg-[#EEEEEE]/60 dark:bg-[#393E46]/60 border border-[#cccccc]/40 dark:border-[#2d2d2d]/40 text-[#222831] dark:text-[#EEEEEE] focus:outline-none focus:ring-2 focus:ring-[#D65A31] focus:border-transparent transition-all backdrop-blur-sm shadow-sm"
+                  className={`w-full px-4 py-3 rounded-lg border bg-transparent focus:outline-none focus:ring-2 focus:ring-[#D65A31] transition-all shadow-sm ${
+                    isDark
+                      ? "border-[#393E46] text-[#EEEEEE] placeholder:text-[#888888]"
+                      : "border-[#e0e0e0] text-[#222831] placeholder:text-[#b0b0b0]"
+                  }`}
                   required
+                  autoComplete="off"
+                  placeholder="you@email.com"
                 />
               </div>
-
               <div>
-                <label htmlFor="message" className="block text-sm font-medium text-[#4a4a4a] dark:text-[#b0b0b0] mb-2">
+                <label htmlFor="message" className={`block text-xs font-semibold mb-2 uppercase tracking-wider ${isDark ? "text-[#b0b0b0]" : "text-[#888888]"}`}>
                   Message
                 </label>
                 <textarea
                   id="message"
-                  rows={4}
+                  rows={5}
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  className="w-full px-4 py-2.5 rounded-xl bg-[#EEEEEE]/60 dark:bg-[#393E46]/60 border border-[#cccccc]/40 dark:border-[#2d2d2d]/40 text-[#222831] dark:text-[#EEEEEE] focus:outline-none focus:ring-2 focus:ring-[#D65A31] focus:border-transparent transition-all backdrop-blur-sm shadow-sm resize-none"
+                  className={`w-full px-4 py-3 rounded-lg border bg-transparent focus:outline-none focus:ring-2 focus:ring-[#D65A31] transition-all shadow-sm resize-none ${
+                    isDark
+                      ? "border-[#393E46] text-[#EEEEEE] placeholder:text-[#888888]"
+                      : "border-[#e0e0e0] text-[#222831] placeholder:text-[#b0b0b0]"
+                  }`}
                   required
+                  placeholder="Type your message..."
                 />
               </div>
               <motion.button
                 type="submit"
-                whileHover={{ scale: 1.02, boxShadow: '0 4px 24px 0 rgba(214,90,49,0.18)' }}
-                whileTap={{ scale: 0.98 }}
-                className="w-full py-4 md:py-3 rounded-xl bg-gradient-to-tr from-[#D65A31] to-[#fbbf24] text-white font-semibold transition-all duration-300 text-lg md:text-base shadow-md hover:from-[#b94a25] hover:to-[#fbbf24] dark:hover:from-[#b94a25] dark:hover:to-[#fbbf24]"
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                className={`w-full py-3 rounded-lg font-semibold transition-all duration-200 shadow text-lg ${
+                  isDark
+                    ? "bg-[#EEEEEE] text-[#18181b] hover:bg-[#D65A31] hover:text-white"
+                    : "bg-[#222831] text-white hover:bg-[#D65A31]"
+                }`}
               >
                 Send Message
               </motion.button>
             </form>
           </motion.div>
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 };
