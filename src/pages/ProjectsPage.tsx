@@ -126,9 +126,9 @@ const ProjectsPage = () => {
           <AnimatePresence initial={false} mode="wait">
             <motion.div
               key={activeIndex}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
               transition={{ duration: 0.35, ease: 'easeInOut' }}
               layout
               className="w-full h-full bg-white dark:bg-[#232323] border border-gray-200 dark:border-[#232323] shadow-lg rounded-2xl p-6 md:p-10 flex flex-col md:flex-row gap-8 items-center"
