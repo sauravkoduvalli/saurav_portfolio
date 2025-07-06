@@ -1,4 +1,33 @@
+
+import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
+// Animated Counter Hook
+function useCountUp(to: number, duration = 1200, suffix = '') {
+  const [count, setCount] = useState(0);
+  const raf = useRef<number | null>(null);
+  useEffect(() => {
+	let start: number | null = null;
+	function animate(ts: number) {
+	  if (!start) start = ts;
+	  const progress = Math.min((ts - start) / duration, 1);
+	  setCount(Math.floor(progress * to));
+	  if (progress < 1) {
+		raf.current = requestAnimationFrame(animate);
+	  } else {
+		setCount(to);
+	  }
+	}
+	raf.current = requestAnimationFrame(animate);
+	return () => {
+	  if (raf.current !== null) cancelAnimationFrame(raf.current);
+	};
+  }, [to, duration]);
+  return suffix ? `${count}${progressDone(count, to) ? suffix : ''}` : count;
+}
+
+function progressDone(count: number, to: number) {
+  return count === to;
+}
 
 const socialLinks = [
 	{
@@ -54,69 +83,84 @@ const socialLinks = [
 	},
 ];
 
+
 const HomePage = () => {
-	return (
-		<div className="min-h-screen w-full flex flex-col items-start justify-center bg-white text-black dark:bg-[#18181b] dark:text-white px-4">
-			<div className="w-full max-w-5xl px-4 md:px-8 lg:pl-16 flex flex-col items-start justify-center min-h-[80vh]">
-				{/* Avatar */}
-				<div className="mb-8">
-					<img
-						src="/assets/portfolio.png"
-						alt="Saurav K avatar"
-						className="w-20 h-20 rounded-full object-cover border-2 border-white dark:border-[#232323] shadow"
-					/>
-				</div>
-				{/* Heading */}
-				<motion.h1
-					initial={{ opacity: 0, y: 20 }}
-					animate={{ opacity: 1, y: 0 }}
-					transition={{ duration: 0.5 }}
-					className="max-w-4xl text-4xl md:text-6xl font-extrabold leading-tight mb-6 text-left"
-				>
-					Cross-platform developer, full-stack learner.
-				</motion.h1>
-				{/* Subtext */}
-				<motion.p
-					initial={{ opacity: 0, y: 20 }}
-					animate={{ opacity: 1, y: 0 }}
-					transition={{ duration: 0.5, delay: 0.1 }}
-					className="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-8 text-left"
-				>
-					I'm Saurav, a mobile and web application developer based in Kochi, Kerala. With over 4.6 years of experience, I build scalable cross-platform apps using Flutter, React Native, and React.js. I'm passionate about crafting clean UIs, integrating robust backends, and transitioning toward full-stack development.
-				</motion.p>
-				{/* CTA Buttons */}
-				<div className="flex flex-wrap gap-4 mb-8">
-					<a
-						href="#projects"
-						className="px-6 py-2 rounded-full bg-black text-white dark:bg-white dark:text-black font-semibold shadow hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors"
-					>
-						View My Work
-					</a>
-					<a
-						href="#contact"
-						className="px-6 py-2 rounded-full border border-black dark:border-white text-black dark:text-white font-semibold hover:bg-gray-100 dark:hover:bg-[#232323] transition-colors"
-					>
-						Get in Touch
-					</a>
-				</div>
-				{/* Social Icons */}
-				<div className="flex gap-6 mt-2">
-					{socialLinks.map((link) => (
-						<a
-							key={link.label}
-							href={link.href}
-							target="_blank"
-							rel="noopener noreferrer"
-							aria-label={link.label}
-							className="text-2xl text-gray-500 hover:text-black dark:hover:text-white transition-colors"
-						>
-							{link.icon}
-						</a>
-					))}
-				</div>
-			</div>
+  // Animated stats
+  const projects = useCountUp(5, 1200);
+  const techs = useCountUp(20, 1200, '+');
+  return (
+	<div className="min-h-screen w-full flex flex-col items-start justify-center bg-white text-black dark:bg-[#18181b] dark:text-white px-4">
+	  <div className="w-full max-w-5xl px-4 md:px-8 lg:pl-16 flex flex-col items-start justify-center min-h-[80vh]">
+		{/* Avatar */}
+		<div className="mb-8">
+		  <img
+			src="/assets/profile-pic.png"
+			alt="Saurav K profile"
+			className="w-24 h-24 rounded-full object-cover border-4 border-white dark:border-[#232323] shadow-lg"
+		  />
 		</div>
-	);
-};
+		{/* Heading */}
+		<motion.h1
+		  initial={{ opacity: 0, y: 20 }}
+		  animate={{ opacity: 1, y: 0 }}
+		  transition={{ duration: 0.5 }}
+		  className="max-w-4xl text-4xl md:text-6xl font-extrabold leading-tight mb-6 text-left"
+		>
+		  Cross-platform developer, full-stack learner.
+		</motion.h1>
+		{/* Subtext */}
+		<motion.p
+		  initial={{ opacity: 0, y: 20 }}
+		  animate={{ opacity: 1, y: 0 }}
+		  transition={{ duration: 0.5, delay: 0.1 }}
+		  className="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-8 text-left"
+		>
+		  I'm Saurav, a mobile and web application developer based in Kochi, Kerala. With over 4.6 years of experience, I build scalable cross-platform apps using Flutter, React Native, and React.js. I'm passionate about crafting clean UIs, integrating robust backends, and transitioning toward full-stack development.
+		</motion.p>
+		{/* Spotlight Portfolio Stats */}
+		<div className="flex gap-10 mb-8">
+		  <div className="flex flex-col items-center">
+			<span className="text-4xl font-bold text-black dark:text-white">{projects}</span>
+			<span className="text-base text-gray-600 dark:text-gray-300 mt-1">Projects Completed</span>
+		  </div>
+		  <div className="flex flex-col items-center">
+			<span className="text-4xl font-bold text-black dark:text-white">{techs}</span>
+			<span className="text-base text-gray-600 dark:text-gray-300 mt-1">Technologies Known</span>
+		  </div>
+		</div>
+		{/* CTA Buttons */}
+		<div className="flex flex-wrap gap-4 mb-8">
+		  <a
+			href="#projects"
+			className="px-6 py-2 rounded-full bg-black text-white dark:bg-white dark:text-black font-semibold shadow hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors"
+		  >
+			View My Work
+		  </a>
+		  <a
+			href="#contact"
+			className="px-6 py-2 rounded-full border border-black dark:border-white text-black dark:text-white font-semibold hover:bg-gray-100 dark:hover:bg-[#232323] transition-colors"
+		  >
+			Get in Touch
+		  </a>
+		</div>
+		{/* Social Icons */}
+		<div className="flex gap-6 mt-2">
+		  {socialLinks.map((link) => (
+			<a
+			  key={link.label}
+			  href={link.href}
+			  target="_blank"
+			  rel="noopener noreferrer"
+			  aria-label={link.label}
+			  className="text-2xl text-gray-500 hover:text-black dark:hover:text-white transition-colors"
+			>
+			  {link.icon}
+			</a>
+		  ))}
+		</div>
+	  </div>
+	</div>
+  );
+}
 
 export default HomePage;
