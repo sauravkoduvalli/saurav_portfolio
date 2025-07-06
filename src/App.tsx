@@ -1,3 +1,5 @@
+{
+  /* Old VerticalScrollNav code
 import AppLayout from "./layouts/AppLayout";
 import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
@@ -20,6 +22,32 @@ function App() {
   return (
     <ThemeProvider>
       <AppLayout sections={sections} />
+    </ThemeProvider>
+  );
+}
+
+export default App;
+*/
+}
+
+import { Outlet } from "react-router";
+import Footer from "./components/Footer";
+import Navbar from "./components/Navbar";
+import { ThemeProvider } from "./contexts/ThemeContext";
+function App() {
+  return (
+    <ThemeProvider>
+      <div className="relative flex w-full flex-col">
+        <header>
+          <Navbar />
+        </header>
+        <main className="flex-auto">
+          <Outlet />
+        </main>
+        <footer>
+          <Footer />
+        </footer>
+      </div>
     </ThemeProvider>
   );
 }

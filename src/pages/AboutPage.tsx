@@ -14,25 +14,18 @@ const AboutPage = () => {
     }
   ];
 
-  const softSkills = [
-    { skill: "Problem Solving", icon: "🧩" },
-    { skill: "Team Collaboration", icon: "👥" },
-    { skill: "Communication", icon: "💬" },
-    { skill: "Adaptability", icon: "🔄" },
-    { skill: "Time Management", icon: "⏰" },
-    { skill: "Creative Thinking", icon: "💡" }
-  ];
+  // const softSkills = [
+  //   { skill: "Problem Solving", icon: "🧩" },
+  //   { skill: "Team Collaboration", icon: "👥" },
+  //   { skill: "Communication", icon: "💬" },
+  //   { skill: "Adaptability", icon: "🔄" },
+  //   { skill: "Time Management", icon: "⏰" },
+  //   { skill: "Creative Thinking", icon: "💡" }
+  // ];
 
   return (
-    <div className="min-h-screen w-full flex flex-col items-center justify-center bg-white text-black dark:bg-[#18181b] dark:text-white px-4">
+    <div className="min-h-screen w-full flex flex-col items-center justify-center bg-white text-black dark:bg-[#18181b] dark:text-white px-4 pt-30 md:pt-36 lg:pt-40">
       <div className="w-full max-w-5xl px-4 md:px-8 flex flex-col items-center justify-center min-h-[80vh]">
-        <motion.h2
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-3xl md:text-5xl font-extrabold mb-10 text-center"
-        >
-          About Me
-        </motion.h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-4xl mb-10 justify-center items-center">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
@@ -72,7 +65,7 @@ const AboutPage = () => {
             </div>
           </motion.div>
         </div>
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
@@ -96,7 +89,7 @@ const AboutPage = () => {
               ))}
             </div>
           </div>
-        </motion.div>
+        </motion.div> */}
       </div>
     </div>
   );

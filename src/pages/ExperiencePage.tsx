@@ -55,16 +55,8 @@ const experiences: Experience[] = [
 
 const ExperiencePage = () => {
   return (
-    <div className="min-h-screen w-full flex flex-col items-center justify-center bg-white dark:bg-[#18181b] text-[#232326] dark:text-[#e5e5e5] px-4 py-16">
+    <div className="min-h-screen w-full flex flex-col items-center justify-center bg-white text-black dark:bg-[#18181b] dark:text-white px-4 py-16 pt-30 md:pt-36 lg:pt-40">
       <div className="w-full max-w-5xl px-4 md:px-8 flex flex-col items-center justify-center">
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="text-4xl md:text-6xl font-extrabold leading-tight mb-6 text-center text-[#232326] dark:text-[#e5e5e5]"
-        >
-          Work Experience
-        </motion.h2>
         <p className="mb-14 text-lg md:text-xl text-[#6b6b6b] dark:text-[#b0b0b0] text-center max-w-2xl">
           A timeline of my professional journey, projects, and the skills I've honed along the way.
         </p>

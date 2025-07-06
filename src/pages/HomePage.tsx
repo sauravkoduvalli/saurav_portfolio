@@ -89,7 +89,7 @@ const HomePage = () => {
   const projects = useCountUp(5, 1200);
   const techs = useCountUp(20, 1200, '+');
   return (
-	<div className="min-h-screen w-full flex flex-col items-start justify-center bg-white text-black dark:bg-[#18181b] dark:text-white px-4">
+	<div className="min-h-screen w-full flex flex-col items-start justify-center bg-white text-black dark:bg-[#18181b] dark:text-white px-4 pt-30 md:pt-36 lg:pt-40">
 	  <div className="w-full max-w-5xl px-4 md:px-8 lg:pl-16 flex flex-col items-start justify-center min-h-[80vh]">
 		{/* Avatar */}
 		<div className="mb-8">

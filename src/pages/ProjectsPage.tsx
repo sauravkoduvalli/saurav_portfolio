@@ -96,15 +96,8 @@ const ProjectsPage = () => {
   };
 
   return (
-    <div className="min-h-screen w-full flex flex-col items-center justify-center bg-white dark:bg-[#18181b] text-black dark:text-white px-4 py-16" id="projects">
+    <div className="min-h-screen w-full flex flex-col items-center justify-center bg-white dark:bg-[#18181b] text-black dark:text-white px-4 py-16 pt-30 md:pt-36 lg:pt-40" id="projects">
       <div className="w-full max-w-5xl px-4 md:px-8 flex flex-col items-center justify-center min-h-[80vh]">
-        <motion.h2
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-3xl md:text-5xl font-extrabold mb-10 text-center"
-        >
-          Projects
-        </motion.h2>
         <div className="relative w-full flex items-center justify-center" onTouchStart={handleTouchStart} onTouchMove={handleTouchMove} onTouchEnd={handleTouchEnd}>
           {/* Carousel Arrows */}
           <button

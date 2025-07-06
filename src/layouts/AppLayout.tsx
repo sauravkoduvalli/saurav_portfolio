@@ -1,7 +1,8 @@
-import { useEffect, useState, useCallback, useTransition } from "react";
+import { useState, useEffect, useTransition, useCallback } from "react";
 import type { ReactNode } from "react";
 import ThemeControl from "../components/ThemeControl";
 import VerticalScrollNav from "../components/VerticalScrollNav";
+import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
 interface Section {
@@ -37,10 +38,10 @@ const AppLayout = ({ sections }: AppLayoutProps) => {
         threshold: [0.5],
       }
     );
-
+  
     const sectionElements = document.querySelectorAll("section");
     sectionElements.forEach((section) => observer.observe(section));
-
+  
     return () => observer.disconnect();
   }, [sections, startTransition]);
 
@@ -65,6 +66,7 @@ const AppLayout = ({ sections }: AppLayoutProps) => {
         currentSection={currentSection}
         onDotClick={scrollToSection}
       />
+      <Navbar />
       <div>
         {sections.map((section) => (
           <section
