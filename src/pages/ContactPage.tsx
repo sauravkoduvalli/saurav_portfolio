@@ -65,7 +65,7 @@ const ContactPage = () => {
                     aria-label={link.label}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`rounded-full p-2 border transition-colors duration-200 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-[#D65A31] dark:border-[#393E46] dark:text-[#EEEEEE] dark:hover:text-[#D65A31] dark:hover:border-[#D65A31] border-[#e0e0e0] text-[#222831] hover:text-[#D65A31] hover:border-[#D65A31]`}
+                    className={`rounded-full p-2 border transition-colors duration-200 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-400 dark:border-[#393E46] dark:text-[#EEEEEE] dark:hover:text-teal-400 dark:hover:border-teal-400 border-[#e0e0e0] text-[#222831] hover:text-teal-500 hover:border-teal-500`}
                   >
                     {link.icon}
                   </a>
@@ -153,7 +153,7 @@ const ContactPage = () => {
                 type="submit"
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
-                className={`w-full py-3 rounded-lg font-semibold transition-all duration-200 shadow text-lg dark:bg-[#EEEEEE] dark:text-[#18181b] dark:hover:bg-[#D65A31] dark:hover:text-white bg-[#222831] text-white hover:bg-[#D65A31]`}
+                className={`w-full py-3 rounded-lg font-semibold transition-all duration-200 shadow text-lg dark:bg-[#EEEEEE] dark:text-[#18181b] dark:hover:bg-teal-400 dark:hover:text-white bg-[#222831] text-white hover:bg-teal-500`}
               >
                 Send Message
               </motion.button>
