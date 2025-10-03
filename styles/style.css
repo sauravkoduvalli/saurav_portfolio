@@ -1,0 +1,61 @@
+:root {
+  --color-dark: #070a13;
+  --color-light: #f1f5f9;
+  --color-slate400: #90a1b9;
+  --color-slate600: #45556c;
+  --color-slate800: #1d293d;
+  --color-rose: #ec003f;
+  --color-indigo: #4f39f6;
+
+  /* rose	rgb(236, 0, 63) */
+  /* indigo rgb(79, 57, 246) */
+
+  /* sizes */
+  --size-xxs: 0.5rem;
+  --size-xs: 0.75rem;
+  --size-sm: 0.875rem;
+  --size-base: 1rem;
+  --size-lg: 1.125rem;
+  --size-xl: 1.25rem;
+  --size-2xl: 1.5rem;
+  --size-3xl: 1.875rem;
+  --size-4xl: 2.25rem;
+  --size-5xl: 3rem;
+  --size-6xl: 3.75rem;
+  --size-7xl: 4.5rem;
+  --size-8xl: 6rem;
+  --size-9xl: 8rem;
+  --size-10xl: 10rem;
+}
+
+* {
+  margin: 0;
+  line-height: calc(1em + 0.5rem);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'General Sans', sans-serif;
+  background-color: var(--color-dark);
+  color: var(--color-light);
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100px;
+  user-select: none;
+}
+
+button {
+  border: none;
+  background-color: inherit;
+  color: var(--color-light);
+  cursor: pointer;
+}
