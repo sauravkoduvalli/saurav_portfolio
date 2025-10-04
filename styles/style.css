@@ -1,6 +1,7 @@
 :root {
   --color-dark: #070a13;
   --color-light: #f1f5f9;
+  --color-slate200: #e2e8f0;
   --color-slate400: #90a1b9;
   --color-slate600: #45556c;
   --color-slate800: #1d293d;
@@ -54,8 +55,18 @@ svg {
 }
 
 button {
+  display: inline-block;
+  padding: 0;
   border: none;
-  background-color: inherit;
-  color: var(--color-light);
+  background: none;
   cursor: pointer;
+  color: inherit;
+}
+
+a {
+  color: var(--color-rose);
+}
+
+strong {
+  color:  var(--color-indigo)
 }
